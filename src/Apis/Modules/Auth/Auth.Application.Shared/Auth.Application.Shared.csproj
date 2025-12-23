@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <PackageReference Include="HungHd.Shared" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.Application.Shared\Common.Application.Shared.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,8 @@
+.p-dataview {
+  display: flex;
+  flex-direction: column;
+
+  .p-dataview-content {
+    flex: 1;
+  }
+}

@@ -1,0 +1,181 @@
+.p-datatable {
+  &.p-datatable-headless {
+    .p-datatable-table-container {
+      .p-datatable-thead {
+        display: none !important;
+      }
+    }
+  }
+
+  .p-datatable-header {
+    padding: 0 !important;
+    > div:not(.p-progressbar) {
+      padding: 0.25rem 1rem !important;
+    }
+    .p-progressbar.p-progressbar-indeterminate {
+      position: absolute;
+      width: 100%;
+      z-index: 9999;
+      top: 0;
+      left: 0;
+    }
+  }
+
+  .p-datatable-table-container {
+    .p-datatable-table {
+      width: 100% !important;
+      .p-datatable-tbody {
+        > tr {
+          &.p-datatable-row-expansion {
+            background: #e9ecef;
+          }
+          td {
+            &.p-selection-column {
+              max-width: 40px !important;
+              width: 40px !important;
+            }
+            &.p-frozen-column {
+              z-index: 1; // Important
+            }
+            &.p-editable-column {
+              line-height: 36px;
+            }
+            &.text-center {
+              text-align: center;
+              justify-content: center;
+            }
+            &.text-wrap {
+              white-space: -moz-pre-wrap !important;
+              white-space: -pre-wrap;
+              white-space: -o-pre-wrap;
+              white-space: pre-wrap;
+              word-wrap: break-word;
+              word-break: break-all;
+              white-space: normal;
+            }
+            &.non-resizer {
+              padding-left: 0;
+              padding-right: 0;
+            }
+          }
+        }
+        .p-button {
+          &.p-button-sm {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.875rem;
+          }
+          &.p-button-icon-only {
+            &.p-button-rounded {
+              width: var(--p-button-sm-icon-only-width) !important;
+              height: var(--p-button-sm-icon-only-width) !important;
+            }
+          }
+          .p-badge {
+            position: absolute;
+            background: transparent;
+            padding: 0 0.2rem;
+            top: 0;
+            left: 15px;
+          }
+        }
+      }
+
+      .p-datatable-thead {
+        z-index: 2; // Goes with sticky (frozen column with z-index=1)
+        th {
+          &.text-center {
+            align-items: center;
+            justify-content: center;
+            .p-datatable-column-header-content {
+              align-items: center;
+              justify-content: center;
+            }
+          }
+
+          &.p-selection-column {
+            max-width: 40px !important;
+            min-width: 40px !important;
+            width: 40px !important;
+          }
+
+          &.non-resizer {
+            .p-column-resizer {
+              display: none !important;
+            }
+            padding-left: 0;
+            padding-right: 0;
+          }
+          &.p-datatable-sortable-column {
+            .p-datatable-column-header-content {
+              position: relative;
+              .p-datatable-column-title {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin-right: 1.5rem;
+                width: 100%;
+              }
+              > span:not(.p-datatable-column-title)[data-pc-section="sort"] {
+                font-size: 0.7rem;
+                position: absolute;
+                right: 0.5rem;
+                > svg {
+                  margin: 0;
+                }
+              }
+              .p-datatable-sort-badge {
+                position: absolute;
+                font-size: 0.7rem;
+                margin: 0;
+                color: var(--p-badge-primary-background);
+                background-color: transparent !important;
+                top: -0.25rem;
+                right: 0.5rem;
+              }
+            }
+          }
+          .p-datatable-column-header-content {
+            min-height: 2.75rem;
+          }
+        }
+      }
+
+      .p-datatable-filter {
+        position: relative;
+        .p-datatable-column-filter-button {
+          display: none !important;
+        }
+
+        .p-datatable-filter-element-container {
+          .p-column-filter {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  .p-paginator-bottom {
+    border-top: 1px solid #dee2e6 !important;
+    margin-bottom: 0.25rem;
+    .p-paginator {
+      padding: 0.25rem 1rem !important;
+      > button {
+        height: 2rem;
+        min-width: 2rem;
+      }
+      .p-paginator-pages {
+        > button.p-paginator-page {
+          height: 2rem;
+          min-width: 2rem;
+        }
+      }
+      .p-select {
+        height: 2.5rem;
+        .p-select-label {
+          padding: 0.5rem;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Compile Remove="Persistence\Interceptors\**" />
+    <EmbeddedResource Remove="Persistence\Interceptors\**" />
+    <None Remove="Persistence\Interceptors\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Cdn\Cdn.Application.Shared\Cdn.Application.Shared.csproj" />
+    <ProjectReference Include="..\..\Common\Common.Infrastructure\Common.Infrastructure.csproj" />
+    <ProjectReference Include="..\Cms.Application\Cms.Application.csproj" />
+    <ProjectReference Include="..\Cms.Domain\Cms.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+</Project>

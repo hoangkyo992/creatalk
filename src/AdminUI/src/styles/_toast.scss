@@ -1,0 +1,31 @@
+.p-toast {
+  min-width: 30rem;
+
+  --p-toast-icon-size: 2rem;
+  --p-toast-summary-font-size: 1.125rem;
+  --p-toast-detail-font-size: 1rem;
+
+  &.p-toast-top-right {
+    right: 1rem !important;
+    top: 0.5rem !important;
+
+    .p-toast-message {
+      margin-bottom: 0 !important;
+
+      .p-toast-message-content {
+        .p-toast-message-text {
+          .p-toast-summary {
+            &:not(:empty) {
+              display: flex;
+              align-items: center;
+            }
+          }
+        }
+      }
+
+      &:not(:first-child) {
+        margin-top: 1rem;
+      }
+    }
+  }
+}

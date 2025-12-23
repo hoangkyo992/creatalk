@@ -1,0 +1,15 @@
+﻿global using System.Net;
+global using System.Net.Mime;
+global using Asp.Versioning;
+global using Cdn.Application.Shared;
+global using Cdn.Domain.Shared.Enums;
+global using Common.Api;
+global using Common.Api.Attributes;
+global using Common.Application.Shared.Attributes;
+global using HungHd.Shared;
+global using HungHd.Shared.Constants;
+global using MediatR;
+global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.RateLimiting;
+global using Microsoft.Extensions.Caching.Memory;

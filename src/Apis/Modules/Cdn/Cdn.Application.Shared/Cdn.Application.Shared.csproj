@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <Folder Include="Settings\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.Application.Shared\Common.Application.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

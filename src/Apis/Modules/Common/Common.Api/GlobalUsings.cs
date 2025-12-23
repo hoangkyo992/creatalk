@@ -1,0 +1,10 @@
+﻿global using System.Text.Json.Serialization;
+global using Common.Api.Attributes;
+global using Common.Application.Services;
+global using Common.Domain;
+global using HungHd.Shared;
+global using HungHd.Shared.Constants;
+global using HungHd.Shared.Exceptions;
+global using HungHd.Shared.Utilities;
+global using Microsoft.Extensions.Logging;
+global using Microsoft.Extensions.Options;

@@ -1,0 +1,85 @@
+.h-field {
+  height: 5.5rem;
+}
+label.required:after {
+  content: "*";
+  color: red;
+}
+
+.formgrid {
+  > .field {
+    > .field-header {
+      display: flex;
+      margin-bottom: 0.15rem;
+    }
+    > label,
+    > .field-header > label {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      margin-bottom: 0.15rem;
+      font-weight: 600;
+    }
+    .p-message {
+      margin-top: 6px;
+    }
+
+    .p-accordion {
+      .p-accordion-tab {
+        .p-accordion-header-action {
+          padding: 0.75rem;
+        }
+        .p-accordion-content {
+          padding: 0.5rem 0 0 0;
+          border: none;
+        }
+      }
+    }
+    .p-inputgroup {
+      .p-inputgroup-addon {
+        padding: 0;
+      }
+    }
+    .p-fieldset {
+      padding: 0;
+      border: none;
+
+      &.legend-full {
+        .p-fieldset-legend {
+          width: 100%;
+        }
+      }
+      .p-fieldset-legend {
+        > a,
+        > span {
+          padding: 0.75rem;
+          text-align: left;
+          justify-content: left;
+        }
+      }
+      .p-fieldset-content {
+        padding: 0.5rem 0 0 0;
+        border: none;
+      }
+    }
+  }
+
+  &.p-fluid {
+    .p-component {
+      width: 100%;
+    }
+  }
+}
+.min-h-2rem {
+  min-height: 2rem;
+}
+.min-h-3rem {
+  min-height: 3rem;
+}
+.min-h-4rem {
+  min-height: 4rem;
+}
+.min-h-5rem {
+  min-height: 5rem;
+}

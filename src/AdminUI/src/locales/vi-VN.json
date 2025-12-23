@@ -1,0 +1,424 @@
+{
+  "TopMenu": {
+    "Actions": {
+      "ChangePassword": "Đổi mật khẩu",
+      "Logout": "Đăng xuất"
+    }
+  },
+  "Dialog": {
+    "Title": {
+      "Confirm": "Xác nhận"
+    },
+    "Button": {
+      "Confirm": "Xác nhận",
+      "Accept": "Đồng ý",
+      "Reject": "Hủy",
+      "Close": "Đóng",
+      "Ok": "Đồng ý",
+      "Cancel": "Hủy",
+      "Sample": "File mẫu"
+    },
+    "Alert": {
+      "UpdateSuccess": "Cập nhật thành công!!!",
+      "DeleteSuccess": "Xóa thành công!!!"
+    }
+  },
+  "Breadcrumb": {
+    "Dashboard": {
+      "ModuleName": "Dashboard",
+      "Dashboard": "Tổng quan"
+    },
+    "Administration": {
+      "ModuleName": "Quản trị hệ thống",
+      "Users": "Người dùng",
+      "Roles": "Vai trò",
+      "UserSessions": "Lịch sử đăng nhập",
+      "Activities": "Lịch sử thao tác"
+    },
+    "Cdn": {
+      "ModuleName": "Đa phương tiện",
+      "Library": "Thư viện",
+      "Albums": "Albums",
+      "Folders": "Thư mục",
+      "Files": "Tập tin"
+    },
+    "Cms": {},
+    "Settings": {
+      "ModuleName": "Cài đặt",
+      "Media": "Đa phương tiện",
+      "General": "Cài đặt chung",
+      "SocialNetworks": "Kết nối"
+    }
+  },
+  "Common": {
+    "ToastError": "OOPS!",
+    "ToastSuccess": "",
+    "ToastInfo": "Thông báo",
+    "ToastWarning": "Cảnh báo!",
+    "CreatedTime": "Ngày tạo",
+    "CreatedBy": "Người tạo",
+    "UpdatedTime": "Cập nhật cuối",
+    "UpdatedBy": "Người cập nhật cuối",
+    "Actions": {
+      "Refresh": "Làm mới DL",
+      "ResetConfig": "Xóa cài đặt",
+      "Download": "Download",
+      "Upload": "Upload",
+      "ViewDetail": "Xem chi tiết",
+      "More": "Thêm",
+      "ViewContent": "Xem nội dung",
+      "SaveChanges": "Lưu thay đổi",
+      "CreateNew": "Tạo mới",
+      "Select": "Chọn",
+      "SelectFromLibrary": "Chọn từ thư viện",
+      "Delete": "Xóa",
+      "Update": "Cập nhật",
+      "Expand": "Mở rộng",
+      "Collapse": "Thu gọn",
+      "Preview": "Xem trước",
+      "MoveUp": "Di chuyển lên trên",
+      "MoveDown": "Di chuyển xuống dưới",
+      "Publish": "Đăng ngay",
+      "Unpublish": "Hủy phát hành",
+      "Archive": "Lưu trữ",
+      "ChangePostType": "Đổi loại bài đăng",
+      "CopyContents": "Sao chép nội dung",
+      "MakeACopy": "Tạo bản sao"
+    },
+    "Messages": {
+      "NoData": "Không có dữ liệu.",
+      "DisplayItems": "Hiển thị {0}/{1} dòng",
+      "PageOf": "Trang {0}/{1}",
+      "DisplayItemsRange": "Hiển thị {0} đến {1}/{2} dòng",
+      "SearchPlaceholder": "Tìm kiếm...",
+      "SelectPlaceholder": "Chọn...",
+      "SelectedLabel": "Đã chọn {'{0}'}/{0}",
+      "ResetConfigWarning": "Bạn có chắc chắn muốn xóa thiết lập hiện tại? Sau khi xóa vui lòng tải lại trạng để tiếp tục.",
+      "Upload": {
+        "NoContent": "Không có DL tải lên. Vui lòng kiểm tra lại nội dung tập tin"
+      }
+    },
+    "Validations": {
+      "MaxLength": "Vượt quá độ dài tối đa: {totalLength}/{maxLength} kí tự",
+      "MinValue": "Không được nhập giá trị thấp hơn {min}",
+      "MinLength": "Ít nhất {0} kí tự"
+    },
+    "DatePresetRanges": {
+      "Today": "Hôm nay",
+      "Yesterday": "Hôm qua",
+      "Tomorrow": "Ngày mai",
+      "Next7Days": "7 ngày tới",
+      "Prev7Days": "7 ngày trước",
+      "ThisMonth": "Tháng này",
+      "LastMonth": "Tháng trước",
+      "ThisYear": "Năm nay"
+    },
+    "ImportDialog": {
+      "Errors": {
+        "Existed": "{property} đã tồn tại",
+        "NotFound": "{property} không tồn tại",
+        "InvalidFormat": "{property} không đúng định dạng",
+        "Required": "{property} không được để trống",
+        "MinValue": "{property} phải lớn hơn {minValue}",
+        "InvalidDateRange": "{property} không nằm trong khoảng cho phép",
+        "InvalidTimeWindow": "{property} không nằm trong khoảng cho phép",
+        "MaxLength": "{property} không được vượt quá {maxLength} kí tự. Số kí tự hiện tại là {totalLength}"
+      }
+    }
+  },
+  "ServerErrors": {
+    "undefined": "@:ServerErrors.UNEXPECTED_ERROR",
+    "UNEXPECTED_ERROR": "Đã có lỗi xảy ra. Vui lòng liên hệ dev-team để được hỗ trợ",
+    "PARAMETER_REQUIRED": "PARAMETER_REQUIRED",
+    "PARAMETER_CONVERT_FAILED": "Trường {modelName} không đúng định dạng, giá trị: {value}",
+    "INVALID_FILTER_OPERATOR": "Sai thông tin bộ lọc",
+    "URL_XSS_ATTACK_DETECTED": "Xss attact detected. Label {label}",
+    "MODEL_STATE_XSS_ATTACK_DETECTED": "Xss attact detected",
+    "QUERY_STRING_XSS_ATTACK_DETECTED": "Xss attact detected. Label {label}",
+    "UNAUTHENTICATED_EXCEPTION": "UNAUTHENTICATED",
+    "INVALID_TENANT_EXCEPTION": "Tenant không tồn tại hoặc đã bị vô hiệu hóa. Vui lòng liên hệ admin để biết thêm thông tin",
+    "USER_EXISTED": "Tài khoản {username} đã tồn tại",
+    "USER_NOT_FOUND": "Không tìm thấy thông tin tài khoản",
+    "USER_USERNAME_INVALID": "Tên đăng nhập không được tồn tại kí tự đặc biệt ngoài _ - . @ và phải bắt đầu và kết thúc bởi chữ hoặc số",
+    "AUTH_NOT_FOUND": "Tài khoản không tồn tại",
+    "AUTH_INVALID_PASSWORD": "Mật khẩu không chính xác",
+    "AUTH_INVALID_PASSWORD_AND_LOCKED": "Tài khoản đã bị khóa do thực hiện đăng nhập sai quá nhiều lần. Vui lòng thử lại sau {0} phút",
+    "AUTH_USER_LOCKED_DUETO_MAX_ATTEMPT": "Tài khoản đang bị khóa. Vui lòng thử lại sau",
+    "AUTH_USER_LOCKED": "Tài khoản đã bị khóa",
+    "AUTH_USER_INACTIVE": "Tài khoản không hoạt động",
+    "AUTH_USER_DISABLED": "Tài khoản đã bị vô hiệu hóa",
+    "AUTH_PASSWORD_TOO_SHORT": "Mật khẩu quá ngắn",
+    "AUTH_PASSWORD_NOT_MATCH": "Xác nhận mật khẩu không chính xác",
+    "AUTH_REFRESH_TOKEN_NOT_FOUND": "Refresh token không tồn tại",
+    "AUTH_REFRESH_TOKEN_EXPIRED": "Refresh token đã quá hạn",
+    "DOCUMENT_NOT_FOUND": "Tệp tin không tồn tại",
+    "EXCEL_TEMPLATE_NOT_FOUND": "Không tìm thấy template upload",
+    "REPORT_NOT_FOUND": "Không tìm thấy báo cáo",
+    "FILE_TOO_BIG": "Tập tin {fileNames} quá lớn. Kích thước tối đa {size}",
+    "FILE_NOT_FOUND": "Tệp tin không tồn tại",
+    "FILE_NAME_EXISTED": "Tệp tin {name} đã tồn tại",
+    "FILE_LOCKED": "Tệp tin đã bị khóa",
+    "FILE_EXTENSION_NOT_SUPPORTED": "Định dạng tập tin {extension} không được hỗ trợ",
+    "MAX_FILES_PER_FOLDER_EXCEEDED": "Đã đạt giới hạn số tập tin cho mỗi thư mục. Vui lòng chọn thư mục khác",
+    "NAME_CONTAINS_INVALID_CHARACTERS": "Tên tập tin/thư mục chứa kí tự không hợp lệ",
+    "FOLDER_NOT_FOUND": "Thư mục không tồn tại",
+    "FOLDER_NAME_EXISTED": "Thư mục {name} đã tồn tại",
+    "FOLDER_LOCKED": "Thư mục đã bị khóa",
+    "FOLDER_PARENT_INVALID": "Không thể thực hiện thao tác ở thư mục này"
+  },
+  "LoginPage": {
+    "Welcome": "Welcome!",
+    "Description": "Đăng nhập để có thể sử dụng hệ thống",
+    "Username": "Tên đăng nhập",
+    "Password": "Mật khẩu",
+    "LoginButton": "Đăng nhập",
+    "UsernameIsRequired": "@:LoginPage.Username không được để trống",
+    "PasswordIsRequired": "@:LoginPage.Password không được để trống",
+    "NoTenantAvailable": "Không thể đăng nhập hệ thống này. Liên hệ admin để biết thêm chi tiết",
+    "IncorrectUsernameOrPassword": "Sai @.lower:LoginPage.Username hoặc @.lower:LoginPage.Password"
+  },
+  "PageNotFound": {
+    "Title": {
+      "Header": "Không Khả Dụng",
+      "HomePage": "Tổng Quan",
+      "Back": "Trở lại"
+    },
+    "Description": {
+      "Header": "Không tìm thấy trang được yêu cầu",
+      "HomePage": "Đi tới trang tổng quan",
+      "Back": "Trở lại trang trước đó"
+    }
+  },
+  "PageUnauthorized": {
+    "Title": {
+      "Back": "Trở lại",
+      "Header": "Không thể truy cập",
+      "HomePage": "Trang chủ"
+    },
+    "Description": {
+      "Back": "Trở lại",
+      "Header": "Bạn không có quyền thực hiện thao tác này",
+      "HomePage": "Đi tới trang chủ"
+    }
+  },
+  "UploadDialog": {
+    "Header": "Upload",
+    "ChooseLabel": "Chọn...",
+    "SelectZoneText": "Nhấn @:UploadDialog.ChooseLabel để lựa chọn và tải lên tệp tin"
+  },
+  "ChangePassword": {
+    "Validation": {
+      "ConfirmSameAsNewPassword": "Mật khẩu mới và mật khẩu xác nhận không giống nhau",
+      "PasswordRequired": "Mật khẩu là bắt buộc",
+      "NewPasswordRequired": "Mật khẩu mới là bắt buộc"
+    },
+    "Form": {
+      "Password": "Mật khẩu",
+      "NewPassword": "Mật khẩu mới",
+      "ConfirmPassword": "Xác nhận mật khẩu",
+      "Change": "Xác nhận",
+      "Cancel": "Hủy",
+      "Title": "Chào bạn {0}",
+      "Description": "Hãy điền thông tin bên dưới để đổi mật khẩu",
+      "Header": "Đổi mật khẩu"
+    }
+  },
+  "FileManager": {
+    "File": "Tập tin",
+    "Folder": "Thư mục",
+    "NewFolder": "Thư mục mới",
+    "Rename": "Đổi tên",
+    "GoBack": "Trở về",
+    "GoHome": "Thư mục gốc",
+    "Trash": "Thùng rác",
+    "Paste": "Dán",
+    "Name": "Tên",
+    "Delete": "Xóa",
+    "Copied": "Sao chép thành công",
+    "Move": "Di chuyển",
+    "Restore": "Khôi phục",
+    "CopyURL": "Sao chép Url",
+    "Upload": "Thêm tập tin",
+    "SortBy": "Sắp xếp",
+    "Properties": "Thông tin chi tiết",
+    "CreatedDate": "Ngày tạo",
+    "Size": "Kích thước",
+    "SortAscending": "Tăng dần",
+    "SortDescending": "Giảm dần",
+    "Messages": {
+      "EmptyFolder": "Không có dữ liệu.",
+      "NoData": "Không tìm thấy tập tim nào phù hợp.",
+      "NumberOfItems": "{0} tập tin",
+      "NumberOfSelectedItems": "Đã chọn {0} tập tin"
+    },
+    "Validations": {
+      "FileNameIsRequired": "@:FileManager.File không được để trống",
+      "FolderNameIsRequired": "@:FileManager.Folder không được để trống"
+    }
+  },
+  "UsersPage": {
+    "Header": "Người dùng",
+    "Username": "Tên đăng nhập",
+    "DisplayName": "Tên hiển thị",
+    "Email": "Email",
+    "Phone": "SĐT",
+    "RoleId": "Vai trò",
+    "StatusId": "Trạng thái",
+    "Password": "Mật khẩu",
+    "ConfirmPassword": "Xác nhận mật khẩu",
+    "Validations": {
+      "UsernameIsRequired": "@:UsersPage.Username không được để trống",
+      "DisplayNameIsRequired": "@:UsersPage.DisplayName không được để trống",
+      "EmailIsRequired": "@:UsersPage.Email không được để trống",
+      "PhoneIsRequired": "@:UsersPage.Phone không được để trống",
+      "StatusIdIsRequired": "@:UsersPage.StatusId không được để trống",
+      "RoleIdIsRequired": "@:UsersPage.RoleId không được để trống",
+      "PasswordIsRequired": "@:UsersPage.Password không được để trống",
+      "ConfirmPasswordIsRequired": "@:UsersPage.ConfirmPassword không được để trống",
+      "ConfirmPasswordMustBeSame": "@:UsersPage.ConfirmPassword phải trùng với @.lower:UsersPage.Password"
+    },
+    "Actions": {
+      "ViewLanguages": "Xem ngôn ngữ",
+      "ResetPassword": "Cấp lại mật khẩu"
+    },
+    "Confirmations": {
+      "Delete": "Bạn có chắc chắn muốn xóa tài khoản '{0}'?"
+    }
+  },
+  "RolesPage": {
+    "Header": "Vai trò",
+    "Name": "Tên vai trò",
+    "Description": "Mô tả",
+    "UpdatePermissions": "Phân quyền cho vai trò {0}",
+    "Validations": {
+      "NameIsRequired": "@:RolesPage.Name không được để trống",
+      "DescriptionIsRequired": "@:RolesPage.Description không được để trống"
+    },
+    "Actions": {
+      "UpdatePermissions": "Phân quyền"
+    },
+    "Confirmations": {
+      "Delete": "Bạn có chắc chắn muốn xóa vai trò '{0}'?",
+      "UpdatePermissions": "Bạn có chắc chắn muốn cập nhật phân quyền cho vai trò {0}"
+    }
+  },
+  "UserStatus": {
+    "Active": "Đang hoạt động",
+    "Disabled": "Vô hiệu hóa",
+    "Locked": "Khóa",
+    "PendingApproval": "Chờ duyệt"
+  },
+  "Boolean": {
+    "True": "Đúng",
+    "False": "Sai"
+  },
+  "UserResetPasswordDialog": {
+    "Header": "Cấp lại mật khẩu cho [{0}]",
+    "Password": "Mật khẩu mới",
+    "ConfirmPassword": "Xác nhận mật khẩu",
+    "Validations": {
+      "PasswordIsRequired": "@:UserResetPasswordDialog.Password không được để trống",
+      "ConfirmPasswordIsRequired": "@:UserResetPasswordDialog.ConfirmPassword không được để trống",
+      "ConfirmPasswordMustBeSame": "@:UserResetPasswordDialog.ConfirmPassword phải trùng với @.lower:UserResetPasswordDialog.Password"
+    }
+  },
+  "UserSessionsPage": {
+    "Username": "Tên đăng nhập",
+    "IpAddress": "Địa chỉ IP",
+    "Platform": "Nền tảng",
+    "Navigator": "Thông tin thiết bị",
+    "StartTime": "Ngày bắt đầu",
+    "EndTime": "Ngày kết thúc"
+  },
+  "LogActivitiesPage": {
+    "Username": "Tên đăng nhập",
+    "IpAddress": "Địa chỉ IP",
+    "Label": "Thao tác",
+    "Description": "Mô tả thao tác",
+    "RequestId": "Request Id",
+    "Time": "Thời gian"
+  },
+  "ActivityLogDetailDialog": {
+    "Header": "Thông tin thay đổi",
+    "OldValue": "Giá trị cũ",
+    "NewValue": "Giá trị mới"
+  },
+  "CRUD": {
+    "C": "Thêm mới",
+    "U": "Cập nhật",
+    "D": "Xóa"
+  },
+  "EntityName": {
+    "User": "Người dùng",
+    "Role": "Vai trò"
+  },
+  "MediaSettings": {
+    "ImageSizes": "Hình ảnh",
+    "ImageSizesDescription": "Các kích thước được liệt kê bên dưới xác định kích thước tối đa tính bằng pixel cần sử dụng khi thêm hình ảnh vào Thư viện.",
+    "ThumbnailSize": "Kích thước nhỏ (T)",
+    "ThumbnailSizeCropExact": "Cắt hình thu nhỏ theo kích thước chính xác (hình thu nhỏ thường có tỷ lệ)",
+    "MediumSize": "Kích thước trung bình (M)",
+    "LargeSize": "Kích thước lớn (L)",
+    "Validations": {
+      "ThumbnailWidthIsRequired": "Chiều rộng cho kích thước nhỏ không được để trống",
+      "ThumbnailHeightIsRequired": "Chiều cao cho kích thước nhỏ không được để trống",
+      "MediumWidthIsRequired": "Chiều rộng cho kích thước vừa không được để trống",
+      "MediumHeightIsRequired": "Chiều cao cho kích thước vừa không được để trống",
+      "LargeWidthIsRequired": "Chiều rộng cho kích thước lớn không được để trống",
+      "LargeHeightIsRequired": "Chiều cao cho kích thước lớn không được để trống"
+    }
+  },
+  "GeneralSettings": {
+    "WebsiteSetting": {
+      "Title": "Trang của bạn",
+      "Description": "Hãy điền thông tin bên dưới để thiết lập trang web của bạn",
+      "SiteTitle": "Tiêu đề trang",
+      "Tagline": "Khẩu hiệu",
+      "GA4Id": "Google Analytics Id",
+      "SiteIcon": "Icon",
+      "SiteLogo": "Logo",
+      "Validations": {
+        "TaglineIsRequired": "@:GeneralSettings.WebsiteSetting.Tagline không được để trống",
+        "SiteTitleIsRequired": "@:GeneralSettings.WebsiteSetting.SiteTitle không được để trống",
+        "SiteLogoIsRequired": "@:GeneralSettings.WebsiteSetting.SiteLogo không được để trống",
+        "SiteIconIsRequired": "@:GeneralSettings.WebsiteSetting.SiteIcon không được để trống",
+        "GA4IdIsRequired": "@:GeneralSettings.WebsiteSetting.GA4Id không được để trống"
+      }
+    }
+  },
+  "SocialNetworkSettings": {
+    "Title": "Cài đặt kết nối mạng xã hội",
+    "Description": "Hãy điền thông tin bên dưới để thiết lập các kết nối tới mạng xã hội của bạn"
+  },
+  "AlbumsPage": {
+    "Header": "Album",
+    "Name": "Tên album",
+    "Title": "Tiêu đề",
+    "Description": "Mô tả",
+    "Validations": {
+      "NameIsRequired": "@:AlbumsPage.Name không được để trống",
+      "DescriptionIsRequired": "@:AlbumsPage.Description không được để trống"
+    },
+    "Confirmations": {
+      "Delete": "Bạn có chắc chắn muốn xóa album '{0}'?",
+      "RemoveFiles": "Bạn có chắc chắn muốn xóa tập tin '{0}' khỏi album này?"
+    }
+  },
+  "LogLabel": {
+    "CreateUser": "Thêm mới người dùng",
+    "UpdateUser": "Cập nhật người dùng",
+    "DeleteUser": "Xóa người dùng",
+    "ResetUserPassword": "Cấp lại mật khẩu",
+    "CreateUserRole": "Thêm mới vai trò",
+    "UpdateUserRole": "Cập nhật vai trò",
+    "DeleteUserRole": "Xóa vai trò",
+    "UpdateUserRoleFeatures": "Cập nhật phân quyền cho vai trò",
+    "CreateLanguage": "Thêm mới ngôn ngữ",
+    "UpdateLanguage": "Cập nhật ngôn ngữ",
+    "DeleteLanguage": "Xóa ngôn ngữ",
+    "SetDefaultLanguage": "Đặt ngôn ngữ mặc định",
+    "CreateSetting": "Thêm mới cài đặt",
+    "UpdateSetting": "Thiết lập",
+    "DeleteSetting": "Xóa cài đặt"
+  }
+}

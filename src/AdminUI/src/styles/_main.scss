@@ -1,0 +1,112 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  font-family:
+    Inter var,
+    sans-serif;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  font-variation-settings: normal;
+  --font-family: "Inter var", sans-serif;
+  --font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+
+  --surface-a: #ffffff;
+  --surface-b: #f9fafb;
+  --surface-c: #f3f4f6;
+  --surface-d: #e5e7eb;
+  --surface-e: #ffffff;
+  --surface-f: #ffffff;
+  --text-color: #4b5563;
+  --text-color-secondary: var(--p-gray-500);
+  --p-primary-color-text: #ffffff;
+  --surface-0: #ffffff;
+  --surface-50: #f9fafb;
+  --surface-100: #f3f4f6;
+  --surface-200: #e5e7eb;
+  --surface-300: #d1d5db;
+  --surface-400: #9ca3af;
+  --surface-500: #6b7280;
+  --surface-600: #4b5563;
+  --surface-700: #374151;
+  --surface-800: #1f2937;
+  --surface-900: #111827;
+  --content-padding: 1.25rem;
+  --inline-spacing: 0.5rem;
+  --border-radius: 6px;
+  --surface-ground: #f9fafb;
+  --surface-section: #ffffff;
+  --surface-card: #ffffff;
+  --surface-overlay: #ffffff;
+  --surface-border: #dfe7ef;
+  --surface-hover: #f6f9fc;
+  --focus-ring: 0 0 0 0.2rem #bfdbfe;
+  --maskbg: rgba(0, 0, 0, 0.4);
+  --highlight-bg: #eff6ff;
+  --highlight-text-color: #1d4ed8;
+
+  --p-scrollbar-bar-size: 8px;
+  --p-scrollbar-bar-background: rgb(230, 230, 230);
+}
+
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family:
+      Inter var,
+      sans-serif;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    font-variation-settings: normal;
+  }
+}
+
+::-webkit-scrollbar {
+  width: var(--p-scrollbar-bar-size);
+  height: var(--p-scrollbar-bar-size);
+}
+::-webkit-scrollbar-track {
+  background-color: var(--p-scrollbar-bar-background);
+}
+::-webkit-scrollbar-corner {
+  background-color: rgb(200, 200, 200);
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgb(200, 200, 200);
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-image: linear-gradient(-45deg, #d5a8e6, #a9a1eb);
+}
+
+.p-scrollpanel-bar {
+  background-image: linear-gradient(-45deg, #d5a8e6, #a9a1eb) !important;
+}
+
+html {
+  height: 100%;
+  font-size: $scale;
+}
+
+body {
+  font-family: var(--font-family) !important;
+  color: var(--text-color);
+  background-color: var(--surface-ground);
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+}
+
+.layout-wrapper {
+  min-height: 100vh;
+}
+
+body {
+  .tox {
+    z-index: 99999;
+  }
+}

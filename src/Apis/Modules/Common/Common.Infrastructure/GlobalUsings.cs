@@ -1,0 +1,10 @@
+﻿global using Common.Domain;
+global using Common.Domain.Interfaces;
+global using HungHd.Shared;
+global using HungHd.Shared.Constants;
+global using HungHd.Shared.Exceptions;
+global using HungHd.Shared.Utilities;
+global using MediatR;
+global using MediatR.Pipeline;
+global using Microsoft.Extensions.Logging;
+global using Microsoft.Extensions.Options;

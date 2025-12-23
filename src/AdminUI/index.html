@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" style="overflow-y: auto">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <meta name="description" content="Smart & light-weight ticket management system" />
+    <meta name="keywords" content="Contents, Documents, Files, Events, Tickets" />
+    <meta name="author" content="Vikiworld" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover, user-scalable=no" />
+    <meta property="og:title" content="Creatalk@2025" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Smart & light-weight ticket management system" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#317EFB" />
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+    <meta name="theme-color" content="#317EFB" />
+    <!-- Favicon -->
+
+    <base href="" />
+    <title>Creatalk - Admin</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="loader-container">
+        <style>
+          .loader-container {
+            position: absolute;
+            z-index: 9999;
+            margin: 0 auto;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
+          .main-loader {
+            width: 100px;
+            aspect-ratio: 1;
+            display: grid;
+          }
+          .main-loader::before,
+          .main-loader::after {
+            content: "";
+            grid-area: 1/1;
+            --c: no-repeat radial-gradient(farthest-side, #25b09b 92%, #0000);
+            background:
+              var(--c) 50% 0,
+              var(--c) 50% 100%,
+              var(--c) 100% 50%,
+              var(--c) 0 50%;
+            background-size: 12px 12px;
+            animation: l12 1s infinite;
+          }
+          .main-loader::before {
+            margin: 4px;
+            filter: hue-rotate(45deg);
+            background-size: 8px 8px;
+            animation-timing-function: linear;
+          }
+
+          @keyframes l12 {
+            100% {
+              transform: rotate(0.5turn);
+            }
+          }
+        </style>
+        <div class="main-loader"></div>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

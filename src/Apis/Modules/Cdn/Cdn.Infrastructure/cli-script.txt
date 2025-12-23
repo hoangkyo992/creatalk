@@ -1,0 +1,8 @@
+﻿
+A: AppContext
+
+1. Add a migration
+    dotnet ef migrations add InitialCreated --context AppDbContext -o Migrations -s ..\Cdn.Api
+
+2. Update database
+    dotnet ef database update -s ..\Cdn.Api --context AppDbContext

@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" />
+        <PackageReference Include="Sentry.AspNetCore" />
+        <PackageReference Include="Serilog.AspNetCore" />
+        <PackageReference Include="Swashbuckle.AspNetCore" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Annotations" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Common.Infrastructure\Common.Infrastructure.csproj" />
+    </ItemGroup>
+
+</Project>

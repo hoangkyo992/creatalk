@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
+    <UserSecretsId>2e4f945f-3260-4789-8b46-da8c4384f3c1</UserSecretsId>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <None Remove="Logs\**" />
+    <None Remove="Publish\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Modules\Auth\Auth.Api\Auth.Api.csproj" />
+    <ProjectReference Include="..\Modules\Cdn\Cdn.Api\Cdn.Api.csproj" />
+    <ProjectReference Include="..\Modules\Cms\Cms.Api\Cms.Api.csproj" />
+  </ItemGroup>
+
+</Project>

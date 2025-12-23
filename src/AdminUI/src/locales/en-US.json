@@ -1,0 +1,426 @@
+{
+  "TopMenu": {
+    "Actions": {
+      "ChangePassword": "Change Password",
+      "Logout": "Log Out"
+    }
+  },
+  "Dialog": {
+    "Title": {
+      "Confirm": "Confirmation"
+    },
+    "Button": {
+      "Confirm": "Confirm",
+      "Accept": "Accept",
+      "Reject": "Reject",
+      "Ok": "Ok",
+      "Cancel": "Cancel",
+      "Close": "Close",
+      "Sample": "Sample"
+    },
+    "Alert": {
+      "UpdateSuccess": "Updated successfully!!!",
+      "DeleteSuccess": "Deleted successfully!!!"
+    },
+    "Confirmations": {
+      "Leave": "You have unsaved changes. Are you sure you want to leave?"
+    }
+  },
+  "Breadcrumb": {
+    "Dashboard": {
+      "ModuleName": "Dashboard",
+      "Dashboard": "Dashboard"
+    },
+    "Administration": {
+      "ModuleName": "Administration",
+      "Users": "Users",
+      "Roles": "Roles",
+      "UserSessions": "User sessions",
+      "Activities": "Activity logs"
+    },
+    "Cdn": {
+      "ModuleName": "Media",
+      "Library": "Library",
+      "Folders": "Folders",
+      "Albums": "Albums",
+      "Files": "Files"
+    },
+    "Cms": {},
+    "Settings": {
+      "ModuleName": "Settings",
+      "Media": "Media",
+      "General": "General",
+      "SocialNetworks": "Social networks"
+    }
+  },
+  "Common": {
+    "ToastError": "OOPS!",
+    "ToastSuccess": "",
+    "ToastInfo": "Information",
+    "ToastWarning": "Warning!",
+    "CreatedTime": "Creation time",
+    "CreatedBy": "Creator",
+    "UpdatedTime": "Last modification time",
+    "UpdatedBy": "Last modification by",
+    "Actions": {
+      "Refresh": "Refresh",
+      "ResetConfig": "Reset config",
+      "Download": "Download",
+      "Upload": "Upload",
+      "ViewDetail": "View detail",
+      "More": "More",
+      "SaveChanges": "Save changes",
+      "ViewContent": "View content",
+      "CreateNew": "Create new",
+      "Select": "Select",
+      "SelectFromLibrary": "Select from Library",
+      "Delete": "Delete",
+      "Update": "Update",
+      "Expand": "Expand",
+      "Collapse": "Collapse",
+      "Preview": "Preview",
+      "MoveUp": "Move up",
+      "MoveDown": "Move down",
+      "Publish": "Publish now",
+      "Unpublish": "Unpublish",
+      "Archive": "Archive",
+      "CopyContents": "Copy contents",
+      "MakeACopy": "Make a copy"
+    },
+    "Messages": {
+      "NoData": "No data.",
+      "DisplayItems": "Showing {0}/{1} records",
+      "PageOf": "Page {0} of {1}",
+      "DisplayItemsRange": "Showing {0} to {1} of {2} records",
+      "SelectPlaceholder": "Select...",
+      "SearchPlaceholder": "Search...",
+      "SelectedLabel": "{'{0}'}/{0} items selected",
+      "ResetConfigWarning": "Are you sure to reset configuration? Reload page is needed.",
+      "Upload": {
+        "NoContent": "No content, please check your file and try again."
+      }
+    },
+    "Validations": {
+      "MaxLength": "Must be {maxLength} characters or fewer. Current: {totalLength}",
+      "MinValue": "The value must be greater than or equal to {min}",
+      "MinLength": "Minimum {0} characters"
+    },
+    "DatePresetRanges": {
+      "Today": "Today",
+      "Yesterday": "Yesterday",
+      "Tomorrow": "Tomorrow",
+      "Next7Days": "Next 7 days",
+      "Prev7Days": "Prev 7 days",
+      "ThisMonth": "This month",
+      "LastMonth": "Last month",
+      "ThisYear": "This year"
+    },
+    "ImportDialog": {
+      "Errors": {
+        "Existed": "{property} is existed",
+        "NotFound": "{property} is not found",
+        "InvalidFormat": "{property} is incorrect format",
+        "Required": "{property} is required",
+        "MinValue": "{property} must be greater than {minValue}",
+        "InvalidDateRange": "{property} must be in range",
+        "InvalidTimeWindow": "{property} must be in valid time window",
+        "MaxLength": "{property} must be {maxLength} characters or fewer. You entered {totalLength} characters"
+      }
+    }
+  },
+  "ServerErrors": {
+    "undefined": "@:ServerErrors.UNEXPECTED_ERROR",
+    "UNEXPECTED_ERROR": "An unexpected error has occurred. please contact your system administrator",
+    "PARAMETER_REQUIRED": "PARAMETER_REQUIRED",
+    "PARAMETER_CONVERT_FAILED": "Can not convert parameter {modelName} to type {type}, value: {value}",
+    "INVALID_FILTER_OPERATOR": "Invalid filter operator {comparison}",
+    "URL_XSS_ATTACK_DETECTED": "Xss attack detected. Label {label}",
+    "MODEL_STATE_XSS_ATTACK_DETECTED": "Xss attack detected",
+    "QUERY_STRING_XSS_ATTACK_DETECTED": "Xss attack detected. Label {label}",
+    "UNAUTHENTICATED_EXCEPTION": "UNAUTHENTICATED",
+    "INVALID_TENANT_EXCEPTION": "Invalid tenant. Please contact your system administrator for more information",
+    "USER_EXISTED": "User {username} is existed",
+    "USER_NOT_FOUND": "User is not found",
+    "USER_USERNAME_INVALID": "Username cannot contain special characters except _ - . @ and must start and end with letter or number",
+    "AUTH_NOT_FOUND": "Account is not exists",
+    "AUTH_INVALID_PASSWORD": "Incorrect password",
+    "AUTH_INVALID_PASSWORD_AND_LOCKED": "Incorrect password. Your user account is locked due to exceeded maximum number of invalid attempts",
+    "AUTH_USER_LOCKED_DUETO_MAX_ATTEMPT": "Account is locked. Please try again later",
+    "AUTH_USER_LOCKED": "User is locked",
+    "AUTH_USER_INACTIVE": "User is inactive",
+    "AUTH_USER_DISABLED": "User is disabled",
+    "AUTH_PASSWORD_TOO_SHORT": "Password is too short",
+    "AUTH_PASSWORD_NOT_MATCH": "The password confirmation does not match",
+    "AUTH_REFRESH_TOKEN_NOT_FOUND": "Refresh token is not found",
+    "AUTH_REFRESH_TOKEN_EXPIRED": "Refresh token is expired",
+    "DOCUMENT_NOT_FOUND": "Document is not found",
+    "EXCEL_TEMPLATE_NOT_FOUND": "Template is not found",
+    "REPORT_NOT_FOUND": "Report is not found",
+    "FILE_TOO_BIG": "Invalid file size: {fileNames}. File size should be smaller than {size}",
+    "FILE_NOT_FOUND": "File is not found",
+    "FILE_NAME_EXISTED": "File {name} is existed",
+    "FILE_LOCKED": "File is locked",
+    "FILE_EXTENSION_NOT_SUPPORTED": "File extension {extension} is not supported",
+    "MAX_FILES_PER_FOLDER_EXCEEDED": "This folder exceeded maximum number of files. Please select another folder to continue",
+    "NAME_CONTAINS_INVALID_CHARACTERS": "File or folder name includes invalid characters",
+    "FOLDER_NOT_FOUND": "Folder is not found",
+    "FOLDER_NAME_EXISTED": "Folder {name} is existed",
+    "FOLDER_LOCKED": "Folder is locked",
+    "FOLDER_PARENT_INVALID": "Invalid operation. Please check and try again."
+  },
+  "LoginPage": {
+    "Welcome": "Welcome!",
+    "Description": "Signin to continue",
+    "Username": "Username",
+    "Password": "Password",
+    "LoginButton": "Login",
+    "UsernameIsRequired": "@:LoginPage.Username is required",
+    "PasswordIsRequired": "@:LoginPage.Password is required",
+    "NoTenantAvailable": "No tenant available. Please contact system administrator for more information",
+    "IncorrectUsernameOrPassword": "Incorrect @.lower:LoginPage.Username or @.lower:LoginPage.Password"
+  },
+  "PageNotFound": {
+    "Title": {
+      "Header": "Not Found",
+      "HomePage": "Dashboard",
+      "Back": "Go Back"
+    },
+    "Description": {
+      "Header": "Requested resource is not available.",
+      "HomePage": "Go to Dashboard page",
+      "Back": "Go to previous page"
+    }
+  },
+  "PageUnauthorized": {
+    "Title": {
+      "Back": "Back",
+      "Header": "Forbidden",
+      "HomePage": "Home"
+    },
+    "Description": {
+      "Back": "Back",
+      "Header": "Requested resource is not allowed.",
+      "HomePage": "Go to home page"
+    }
+  },
+  "UploadDialog": {
+    "Header": "Upload",
+    "ChooseLabel": "Select file...",
+    "SelectZoneText": "Click @:UploadDialog.ChooseLabel to select file to upload."
+  },
+  "ChangePassword": {
+    "Validation": {
+      "ConfirmSameAsNewPassword": "Confirm password and new password must be the same",
+      "PasswordRequired": "Password is required",
+      "NewPasswordRequired": "Password is required"
+    },
+    "Form": {
+      "Password": "Password",
+      "NewPassword": "New Password",
+      "ConfirmPassword": "Confirm Password",
+      "Change": "Change",
+      "Cancel": "Cancel",
+      "Title": "Hi {0}",
+      "Description": "Please fill the form to update password",
+      "Header": "Change Password"
+    }
+  },
+  "FileManager": {
+    "File": "File",
+    "Folder": "Folder",
+    "NewFolder": "New folder",
+    "Rename": "Rename",
+    "GoBack": "Back",
+    "GoHome": "Home",
+    "Trash": "Recycle Bin",
+    "Paste": "Paste",
+    "Name": "Name",
+    "Delete": "Delete",
+    "Move": "Move",
+    "Copied": "Copied",
+    "Restore": "Restore",
+    "CopyURL": "Copy Url",
+    "Upload": "Upload files",
+    "SortBy": "Sort By",
+    "Properties": "Properties",
+    "CreatedDate": "Date",
+    "Size": "Size",
+    "SortAscending": "Ascending",
+    "SortDescending": "Descending",
+    "Messages": {
+      "EmptyFolder": "This folder is empty.",
+      "NoData": "no such file or directory found. Please try another keyword",
+      "NumberOfItems": "{0} item(s)",
+      "NumberOfSelectedItems": "{0} item selected"
+    },
+    "Validations": {
+      "FileNameIsRequired": "@:FileManager.File is required",
+      "FolderNameIsRequired": "@:FileManager.Folder is required"
+    }
+  },
+  "UsersPage": {
+    "Header": "User",
+    "Username": "Username",
+    "DisplayName": "Display name",
+    "Email": "Email",
+    "Phone": "Phone number",
+    "RoleId": "Role",
+    "StatusId": "Status",
+    "Password": "Password",
+    "ConfirmPassword": "Confirm Password",
+    "Validations": {
+      "UsernameIsRequired": "@:UsersPage.Username is required",
+      "DisplayNameIsRequired": "@:UsersPage.DisplayName is required",
+      "EmailIsRequired": "@:UsersPage.Email is required",
+      "PhoneIsRequired": "@:UsersPage.Phone is required",
+      "StatusIdIsRequired": "@:UsersPage.StatusId is required",
+      "RoleIdIsRequired": "@:UsersPage.RoleId is required",
+      "PasswordIsRequired": "@:UsersPage.Password is required",
+      "ConfirmPasswordIsRequired": "@:UsersPage.ConfirmPassword is required",
+      "ConfirmPasswordMustBeSame": "@:UsersPage.ConfirmPassword must be equal to @.lower:UsersPage.Password"
+    },
+    "Actions": {
+      "ViewLanguages": "View user languages",
+      "ResetPassword": "Reset password"
+    },
+    "Confirmations": {
+      "Delete": "Are you sure to delete user '{0}'?"
+    }
+  },
+  "RolesPage": {
+    "Header": "Role",
+    "UpdatePermissions": "Update permissions of {0}",
+    "Name": "Name",
+    "Description": "Description",
+    "Validations": {
+      "NameIsRequired": "@:RolesPage.Name is required",
+      "DescriptionIsRequired": "@:RolesPage.Description is required"
+    },
+    "Actions": {
+      "UpdatePermissions": "Update permissions"
+    },
+    "Confirmations": {
+      "Delete": "Are you sure to delete role '{0}'?",
+      "UpdatePermissions": "Are you sure to update the permissions for {0}"
+    }
+  },
+  "UserStatus": {
+    "Active": "Active",
+    "Disabled": "Disabled",
+    "Locked": "Locked",
+    "PendingApproval": "Pending Approval"
+  },
+  "Boolean": {
+    "True": "True",
+    "False": "False"
+  },
+  "UserResetPasswordDialog": {
+    "Header": "Reset password for [{0}]",
+    "Password": "New password",
+    "ConfirmPassword": "Confirm Password",
+    "Validations": {
+      "PasswordIsRequired": "@:UsersPage.Password is required",
+      "ConfirmPasswordIsRequired": "@:UsersPage.ConfirmPassword is required",
+      "ConfirmPasswordMustBeSame": "@:UserResetPasswordDialog.ConfirmPassword must be equal to @.lower:UserResetPasswordDialog.Password"
+    }
+  },
+  "UserSessionsPage": {
+    "Username": "Username",
+    "IpAddress": "Ip address",
+    "Platform": "Platform",
+    "Navigator": "Navigator",
+    "StartTime": "Start time",
+    "EndTime": "End time"
+  },
+  "LogActivitiesPage": {
+    "Username": "Username",
+    "IpAddress": "Ip address",
+    "Label": "Action",
+    "Description": "Description",
+    "RequestId": "Request Id",
+    "Time": "Time"
+  },
+  "ActivityLogDetailDialog": {
+    "Header": "Changes tracking",
+    "OldValue": "Old value",
+    "NewValue": "New value"
+  },
+  "CRUD": {
+    "C": "Create",
+    "U": "Update",
+    "D": "Delete"
+  },
+  "EntityName": {
+    "User": "User",
+    "Role": "Role"
+  },
+  "MediaSettings": {
+    "ImageSizes": "Image sizes",
+    "ImageSizesDescription": "The sizes listed below determine the maximum dimensions in pixels to use when adding an image to the Media Library.",
+    "ThumbnailSize": "Thumbnail size",
+    "ThumbnailSizeCropExact": "Crop thumbnail to exact dimensions (normally thumbnails are proportional)",
+    "MediumSize": "Medium size",
+    "LargeSize": "Large size",
+    "Validations": {
+      "ThumbnailWidthIsRequired": "Thumbnail size width is required",
+      "ThumbnailHeightIsRequired": "Thumbnail size height is required",
+      "MediumWidthIsRequired": "Medium size width is required",
+      "MediumHeightIsRequired": "Medium size height is required",
+      "LargeWidthIsRequired": "Large size width is required",
+      "LargeHeightIsRequired": "Large size height is required"
+    }
+  },
+  "GeneralSettings": {
+    "WebsiteSetting": {
+      "Title": "Your site",
+      "Description": "Please fill out the information below to set up your website.",
+      "SiteTitle": "Site title",
+      "Tagline": "Tagline",
+      "GA4Id": "Google Analytics Id",
+      "SiteIcon": "Site icon",
+      "SiteLogo": "Logo",
+      "Validations": {
+        "TaglineIsRequired": "@:GeneralSettings.WebsiteSetting.Tagline is required",
+        "SiteTitleIsRequired": "@:GeneralSettings.WebsiteSetting.SiteTitle is required",
+        "SiteIconIsRequired": "@:GeneralSettings.WebsiteSetting.SiteIcon is required",
+        "SiteLogoIsRequired": "@:GeneralSettings.WebsiteSetting.SiteLogo is required",
+        "GA4IdIsRequired": "@:GeneralSettings.WebsiteSetting.GA4Id is required"
+      }
+    }
+  },
+  "SocialNetworkSettings": {
+    "Title": "Set up your social networks",
+    "Description": "Please fill out the information below to set up your social networks."
+  },
+  "AlbumsPage": {
+    "Header": "Album",
+    "Name": "Name",
+    "Title": "Title",
+    "Description": "Description",
+    "Validations": {
+      "NameIsRequired": "@:AlbumsPage.Name is required",
+      "DescriptionIsRequired": "@:AlbumsPage.Description is required"
+    },
+    "Confirmations": {
+      "Delete": "Are you sure to delete album '{0}'?",
+      "RemoveFiles": "Are you sure to remove file '{0}' from this album?"
+    }
+  },
+  "LogLabel": {
+    "CreateUser": "Create user",
+    "UpdateUser": "Update user",
+    "DeleteUser": "Delete user",
+    "ResetUserPassword": "Reset password",
+    "CreateUserRole": "Create role",
+    "UpdateUserRole": "Update role",
+    "DeleteUserRole": "Delete role",
+    "UpdateUserRoleFeatures": "Update role's permissions",
+    "CreateLanguage": "Create language",
+    "UpdateLanguage": "Update language",
+    "DeleteLanguage": "Delete language",
+    "SetDefaultLanguage": "Set default language",
+    "CreateSetting": "Create setting",
+    "UpdateSetting": "Update setting",
+    "DeleteSetting": "Delete setting"
+  }
+}

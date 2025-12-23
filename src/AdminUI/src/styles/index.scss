@@ -1,0 +1,27 @@
+@import "@/styles/variables";
+@import "@/styles/_mixins";
+@import "@/styles/_preloading";
+@import "@/styles/_main";
+@import "@/styles/_topbar";
+@import "@/styles/_menu";
+@import "@/styles/_content";
+@import "@/styles/_responsive";
+@import "@/styles/_utils";
+@import "@/styles/_typography";
+@import "@/styles/_toast";
+@import "@/styles/form";
+@import "@/styles/_p.card";
+@import "@/styles/_p.button";
+@import "@/styles/_p.select";
+@import "@/styles/_p.toolbar";
+@import "@/styles/_p.calendar";
+@import "@/styles/_p.datatable";
+@import "@/styles/_p.treetable";
+@import "@/styles/_p.dataview";
+@import "@/styles/_p.drawer";
+@import "@/styles/_p.confirmdialog";
+
+/* PrimeVue */
+// @import 'primevue/resources/primevue.min.css'; // version deprecated. You must open the command line if you are using < 3.29.00
+@import "primeflex/primeflex.scss";
+@import "primeicons/primeicons.css";

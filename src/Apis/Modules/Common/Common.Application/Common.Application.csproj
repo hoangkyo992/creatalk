@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <PackageReference Include="FluentValidation" />
+        <PackageReference Include="HungHd.Caching" />
+        <PackageReference Include="HungHd.LinqExtensions" />
+        <PackageReference Include="MediatR" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Common.Application.Shared\Common.Application.Shared.csproj" />
+      <ProjectReference Include="..\Common.Domain\Common.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

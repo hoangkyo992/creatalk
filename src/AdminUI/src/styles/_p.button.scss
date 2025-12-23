@@ -1,0 +1,100 @@
+button,
+span {
+  &.p-button {
+    &.p-button-sm {
+      font-size: 1rem;
+      padding: 0.4rem 0.75rem;
+    }
+    &.p-button-icon-only {
+      width: var(--p-button-sm-icon-only-width) !important;
+      height: var(--p-button-sm-icon-only-width) !important;
+    }
+
+    &.p-button-small {
+      max-height: 2.5rem;
+      min-width: 10rem;
+      padding: 1rem;
+
+      .p-button-label {
+        text-align: left;
+      }
+    }
+  }
+
+  &.p-unclickable {
+    cursor: default !important;
+    pointer-events: none;
+    user-select: text;
+  }
+}
+
+.p-splitbutton {
+  &.p-button-sm {
+    .p-button {
+      &.p-button-sm {
+        font-size: 1rem;
+        padding: 0.4rem 0.75rem;
+
+        &.p-button-icon-only {
+          width: 3rem;
+          height: auto;
+        }
+      }
+    }
+  }
+}
+
+.p-menuitem-content {
+  .p-menuitem-link {
+    transition:
+      background-color 0.2s,
+      color 0.2s,
+      border-color 0.2s,
+      box-shadow 0.2s;
+    border-radius: 6px;
+    .p-menuitem-icon,
+    .p-menuitem-text {
+      color: inherit !important;
+    }
+    .p-menuitem-outlined & {
+      border-width: 1px;
+      border-style: solid;
+    }
+    .p-menuitem-primary & {
+      color: $primaryColor !important;
+      background: transparent;
+      border-color: $primaryColor;
+      font-weight: 600;
+    }
+    .p-menuitem-danger & {
+      color: $dangerColor !important;
+      background: transparent;
+      border-color: $dangerColor;
+      font-weight: 600;
+    }
+    .p-menuitem-warning & {
+      color: $warningColor !important;
+      background: transparent;
+      border-color: $warningColor;
+      font-weight: 600;
+    }
+    .p-menuitem-help & {
+      color: $helpColor !important;
+      background: transparent;
+      border-color: $helpColor;
+      font-weight: 600;
+    }
+    .p-menuitem-success & {
+      color: $successColor !important;
+      background: transparent;
+      border-color: $successColor;
+      font-weight: 600;
+    }
+    .p-menuitem-secondary & {
+      color: $secondaryColor !important;
+      background: transparent;
+      border-color: $secondaryColor;
+      font-weight: 600;
+    }
+  }
+}

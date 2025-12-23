@@ -1,0 +1,17 @@
+﻿global using System.Net;
+global using System.Text.Json.Serialization;
+global using AutoMapper;
+global using Cms.Application.Shared.Events;
+global using Cms.Application.Shared.Resources;
+global using Cms.Domain.Entities;
+global using Common.Application.Common.Extensions;
+global using Common.Application.Common.Models;
+global using Common.Application.Services;
+global using Common.Application.Shared;
+global using Common.Domain;
+global using Common.Domain.Enums;
+global using FluentValidation;
+global using HungHd.LinqExtensions;
+global using HungHd.Shared;
+global using MediatR;
+global using Microsoft.EntityFrameworkCore;

@@ -1,0 +1,17 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.json",
+  "include": ["env.d.ts", "src/**/*.ts", "src/**/*.vue", "__global.d.ts"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "types": ["node", "vite-plugin-pages/client", "vite-plugin-vue-layouts/client"],
+    "preserveSymlinks": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "noImplicitThis": true,
+    "moduleResolution": "node"
+  },
+  "exclude": ["node_modules", "src/layout/**.vue"]
+}

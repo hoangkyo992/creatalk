@@ -1,0 +1,25 @@
+.p-card.p-card-in-dialog {
+  box-shadow:
+    0 0px 3px 2px rgba(0, 0, 0, 0.2),
+    0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 1px 3px 0 rgba(0, 0, 0, 0.12) !important;
+  .p-card-body {
+    text-align: center;
+    padding: 1.5rem;
+    text-align: left !important;
+
+    .p-card-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      text-transform: capitalize;
+      text-align: left !important;
+    }
+    .p-card-content {
+      padding: 1rem 0;
+    }
+    .p-card-footer {
+      padding: 0.5rem 0;
+      text-align: right !important;
+    }
+  }
+}

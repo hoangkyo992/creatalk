@@ -1,0 +1,67 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
+    <PackageVersion Include="AutoMapper" Version="13.0.1" />
+    <PackageVersion Include="DotLiquid" Version="2.2.692" />
+    <PackageVersion Include="FluentValidation" Version="11.11.0" />
+    <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
+    <PackageVersion Include="Hangfire.AspNetCore" Version="1.8.16" />
+    <PackageVersion Include="Hangfire.PostgreSql" Version="1.20.10" />
+    <PackageVersion Include="HtmlAgilityPack" Version="1.12.1" />
+    <PackageVersion Include="HungHd.Caching" Version="2.0.0" />
+    <PackageVersion Include="HungHd.LinqExtensions" Version="2.0.0" />
+    <PackageVersion Include="Magick.NET-Q16-AnyCPU" Version="14.10.0" />
+    <PackageVersion Include="MediatR" Version="12.4.1" />
+    <PackageVersion Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageVersion Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageVersion Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageVersion Include="RabbitMQ.Client" Version="6.8.1" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Abstractions" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Extensions.Caching.Abstractions" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Extensions.Caching.Memory" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyModel" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Extensions.Logging" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Extensions.Options" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.IdentityModel.Tokens" Version="8.5.0" />
+    <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+    <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.1" />
+    <PackageVersion Include="Polly" Version="8.5.2" />
+    <PackageVersion Include="Refit" Version="8.0.0" />
+    <PackageVersion Include="Sentry.AspNetCore" Version="4.13.0" />
+    <PackageVersion Include="Serilog" Version="4.1.0" />
+    <PackageVersion Include="Serilog.AspNetCore" Version="8.0.3" />
+    <PackageVersion Include="StackExchange.Redis" Version="2.8.41" />
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="7.1.0" />
+    <PackageVersion Include="Swashbuckle.AspNetCore.Annotations" Version="7.1.0" />
+    <PackageVersion Include="System.IdentityModel.Tokens.Jwt" Version="8.5.0" />
+    <PackageVersion Include="System.Linq.Dynamic.Core" Version="1.6.6" />
+    <PackageVersion Include="System.Text.Encodings.Web" Version="9.0.7" />
+    <PackageVersion Include="System.Text.Json" Version="9.0.7" />
+    <PackageVersion Include="AWSSDK.S3" Version="3.7.415" />
+    <PackageVersion Include="EPPlus" Version="7.0.9" />
+    <PackageVersion Include="HungHd.Shared" Version="2.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
+    <PackageVersion Include="Serilog.Extensions.Hosting" Version="8.0.0" />
+    <PackageVersion Include="Serilog.Settings.Configuration" Version="8.0.4" />
+    <PackageVersion Include="Serilog.Sinks.Console" Version="6.0.0" />
+    <PackageVersion Include="Serilog.Sinks.File" Version="6.0.0" />
+    <PackageVersion Include="System.Formats.Asn1" Version="9.0.7" />
+  </ItemGroup>
+</Project>

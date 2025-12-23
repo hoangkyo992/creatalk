@@ -1,0 +1,271 @@
+.layout-main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
+  justify-content: space-between;
+  padding: 5rem 1rem 1rem 2rem;
+  transition: margin-left $transitionDuration;
+}
+
+.layout-main {
+  flex: 1 1 auto;
+  height: 100%;
+}
+
+.page-content {
+  overflow: hidden;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  flex: 1;
+  min-height: 400px;
+  position: relative;
+
+  > .page-progress-bar {
+    position: absolute;
+    height: 4px;
+    width: 100%;
+    z-index: 99;
+    top: 0;
+  }
+}
+
+.layout-content {
+  height: 100%;
+  > div {
+    height: 100%;
+  }
+
+  .page-content {
+    overflow: hidden;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    flex: 1;
+    min-height: 400px;
+    position: relative;
+
+    > .page-progress-bar {
+      position: absolute;
+      height: 4px;
+      width: 100%;
+      z-index: 99;
+      top: 0;
+    }
+  }
+
+  .page-toolbar {
+    .p-breadcrumb {
+      border: none;
+      background: inherit;
+      font-weight: bold;
+      padding: 0.75rem 1rem;
+      .p-menuitem-separator {
+        color: #3b82f6 !important;
+      }
+      .p-menuitem-link {
+        .p-menuitem-text,
+        .p-menuitem-icon {
+          color: #3b82f6 !important;
+        }
+      }
+    }
+  }
+}
+
+.p-tabview {
+  .p-tabview-panels {
+    padding: 0.75rem 1rem !important;
+    .p-tabview-panel {
+      border-bottom: 1px solid #dee2e6;
+    }
+  }
+}
+
+.p-fileupload {
+  .p-fileupload-buttonbar {
+    padding: 0.5rem !important;
+  }
+  .p-fileupload-content {
+    padding: 0.5rem !important;
+  }
+}
+.h-100pc {
+  height: 100%;
+}
+
+.p-fileupload {
+  &.p-fileupload-sm {
+    > .p-button {
+      padding: 0.5rem 1rem;
+    }
+  }
+}
+
+.p-chips {
+  &.p-chips-sm {
+    .p-chips-multiple-container {
+      padding: 0.3rem 0.75rem;
+      .p-chips-input-token {
+        padding: 0.2rem 0;
+      }
+      .p-chips-token {
+        padding: 0.2rem 0.5rem;
+      }
+    }
+  }
+}
+.p-dialog {
+  .p-dialog-footer {
+    padding: 1.5rem;
+  }
+  .p-dialog-content {
+    padding-bottom: 0;
+  }
+
+  &.no-padding-dialog {
+    .p-dialog-content {
+      padding: 0 !important;
+    }
+  }
+  .p-dialog-header {
+    .p-dialog-title {
+      text-transform: uppercase;
+    }
+  }
+}
+
+.p-panel.p-component.p-panel-sm {
+  margin-bottom: 0.5rem;
+
+  .p-panel-header {
+    min-height: 3.215rem;
+    padding: 0.5rem 0.75rem;
+  }
+  .p-panel-footer {
+    padding: 0.5rem 0.75rem;
+  }
+  .p-toggleable-content {
+    .p-panel-content {
+      padding: 0.5rem 0.75rem;
+    }
+  }
+  &.no-content-padding {
+    .p-toggleable-content {
+      .p-panel-content {
+        padding: 0 !important;
+      }
+    }
+  }
+}
+.p-speeddial {
+  .p-speeddial-button {
+    &.p-button.p-button-icon-only.p-button-sm {
+      height: 3.2rem;
+      width: 3.2rem;
+    }
+  }
+  .p-speeddial-action {
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+}
+
+.p-multiselect {
+  &.p-multiselect-items-sm {
+    .p-multiselect-label {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+  }
+}
+
+.p-treeselect {
+  &.p-treeselect-items-sm {
+    .p-treeselect-label {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+  }
+}
+
+.p-tree {
+  .p-tree-container {
+    .p-treenode {
+      .p-treenode-content {
+        padding: 0.125rem 0.25rem;
+      }
+    }
+  }
+}
+
+.p-treeselect-panel {
+  .p-treeselect-items-wrapper {
+    .p-tree {
+      padding: 0.5rem;
+    }
+  }
+}
+
+input {
+  &.p-inputtext.p-inputtext-sm {
+    font-size: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}
+span.p-inputnumber {
+  &.p-inputtext-sm {
+    .p-inputnumber-input {
+      font-size: 1rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+  }
+}
+
+.p-tabview {
+  .p-tabview-nav-container {
+    .p-tabview-nav-content {
+      .p-tabview-nav {
+        .p-tabview-header {
+          .p-tabview-nav-link {
+            padding: 0.75rem 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.p-tag {
+  .p-tag-icon,
+  .p-tag-value,
+  .p-tag-icon.pi {
+    line-height: 1;
+  }
+
+  &.p-tag-outlined {
+    background-color: transparent;
+    color: $primaryColor;
+    border: 1px solid;
+    border-color: $primaryColor;
+  }
+}
+
+*.p-disabled,
+*.p-component:disabled {
+  opacity: 0.8 !important;
+}
+
+.p-tieredmenu {
+  .p-tieredmenu-root-list {
+    .p-menuitem {
+      > .p-menuitem-content {
+        .p-menuitem-link {
+          padding: 0.5rem;
+        }
+      }
+    }
+  }
+}

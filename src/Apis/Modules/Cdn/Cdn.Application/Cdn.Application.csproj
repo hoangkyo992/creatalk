@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Auth\Auth.Application.Shared\Auth.Application.Shared.csproj" />
+    <ProjectReference Include="..\..\Common\Common.Application\Common.Application.csproj" />
+    <ProjectReference Include="..\Cdn.Application.Shared\Cdn.Application.Shared.csproj" />
+    <ProjectReference Include="..\Cdn.Domain\Cdn.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" />
+  </ItemGroup>
+
+</Project>
