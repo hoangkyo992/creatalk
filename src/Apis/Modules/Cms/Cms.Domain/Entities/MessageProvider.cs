@@ -1,7 +1,7 @@
 ﻿namespace Cms.Domain.Entities;
 
 [Table("MessageProvider", Schema = DbConstants.SchemaName)]
-public class MessageProvider : BaseEntity
+public class MessageProvider : TenantBaseEntity
 {
     [Required]
     [MaxLength(MessageProviderConstants.ColumnsMaxLength.Code)]

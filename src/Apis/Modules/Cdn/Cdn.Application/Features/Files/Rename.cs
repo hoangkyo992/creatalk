@@ -44,6 +44,7 @@ public class Rename
             var item = await appContext.Files
                   .Where(c => c.Id == command.Id)
                   .Where(c => c.StatusId != FileStatus.IsInTrash)
+                  .Include(c => c.Folder)
                   .FirstOrDefaultAsync(cancellationToken);
             if (item == null)
                 return new FailResult<Result>(ErrorMessages.FILE_NOT_FOUND, HttpStatusCode.NotFound);
@@ -70,7 +71,7 @@ public class Rename
 
             await appContext.SaveChangesAsync(cancellationToken);
 
-            await mediator.Publish(new OnFileRenamedEvent { FileIds = [command.Id], FolderId = item.FolderId }.SetCurrentUser(currentUser), cancellationToken);
+            await mediator.Publish(new OnFileRenamedEvent { FileIds = [command.Id], FolderId = item.FolderId, FolderName = item.Folder.Name }.SetCurrentUser(currentUser), cancellationToken);
 
             return new SuccessResult<Result>(new Result
             {

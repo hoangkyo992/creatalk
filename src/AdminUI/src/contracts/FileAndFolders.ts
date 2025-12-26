@@ -52,6 +52,7 @@ export interface FileItemDto extends BaseDto {
   statusCode: string;
   size: number;
   extension: string;
+  publicUrl: string;
   mineType: string;
 }
 

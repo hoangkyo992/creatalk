@@ -20,6 +20,8 @@ public class CurrentUser : ICurrentUser
 
     public long Id => _claimsPrincipal.FindUserId();
 
+    public long TenantId => _claimsPrincipal.GetClaimValue<long>(AppClaimTypes.TenantId);
+
     public long SessionId => _claimsPrincipal.GetClaimValue<long>(AppClaimTypes.SessionId);
 
     public long RequestApplicationId => _claimsPrincipal.GetClaimValue<long>(AppClaimTypes.RequestApplicationId);

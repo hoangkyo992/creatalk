@@ -42,7 +42,14 @@
       "Folders": "Thư mục",
       "Files": "Tập tin"
     },
-    "Cms": {},
+    "Cms": {
+      "ModuleName": "Phân phối vé",
+      "Tickets": "Danh sách vé",
+      "Attendees": "Người tham dự",
+      "NewAttendees": "Mới tạo",
+      "SentAttendees": "Đã xử lý",
+      "CancelledAttendees": "Đã hủy"
+    },
     "Settings": {
       "ModuleName": "Cài đặt",
       "Media": "Đa phương tiện",
@@ -413,12 +420,56 @@
     "UpdateUserRole": "Cập nhật vai trò",
     "DeleteUserRole": "Xóa vai trò",
     "UpdateUserRoleFeatures": "Cập nhật phân quyền cho vai trò",
-    "CreateLanguage": "Thêm mới ngôn ngữ",
-    "UpdateLanguage": "Cập nhật ngôn ngữ",
-    "DeleteLanguage": "Xóa ngôn ngữ",
-    "SetDefaultLanguage": "Đặt ngôn ngữ mặc định",
+    "CreateAlbum": "Thêm mới album",
+    "UpdateAlbum": "Cập nhật album",
+    "DeleteAlbum": "Xóa album",
     "CreateSetting": "Thêm mới cài đặt",
     "UpdateSetting": "Thiết lập",
-    "DeleteSetting": "Xóa cài đặt"
+    "DeleteSetting": "Xóa cài đặt",
+    "CreateAttendeeMessages": "Gửi thông báo",
+    "CreateAttendee": "Thêm mới người tham gia",
+    "UpdateAttendee": "Cập nhật người tham gia",
+    "DeleteAttendee": "Xóa người tham gia",
+    "RestoreAttendee": "Khôi phục vé",
+    "CancelAttendee": "Hủy vé",
+    "CreateMessageProvider": "Thêm mới cấu hình gửi thông báo",
+    "UpdateMessageProvider": "Cập nhật cấu hình gửi thông báo",
+    "DeleteMessageProvider": "Xóa cấu hình gửi thông báo"
+  },
+  "TicketsPage": {
+    "Name": "Tên vé",
+    "Zone": "Vị trí"
+  },
+  "AttendeesPage": {
+    "FullName": "Họ và tên",
+    "Email": "Email",
+    "PhoneNumber": "SĐT",
+    "MessageStatus": "Trạng thái",
+    "Actions": {
+      "CreateMessages": "Gửi thông báo",
+      "ViewTicket": "Xem vé",
+      "Cancel": "Hủy vé",
+      "Restore": "Khôi phục vé",
+      "ViewLogs": "Xem lịch sử"
+    },
+    "Confirmations": {
+      "CreateMessages": "Bạn có chắc chắn muốn gửi thông báo cho tất cả người tham dự sự kiện?",
+      "CancelAttendee": "Bạn có chắc chắn muốn hủy vé cho người tham dự này?",
+      "RestoreAttendee": "Bạn có chắc chắn muốn khôi phục vé cho người tham dự này?"
+    },
+    "Alert": {
+      "CreateMessagesSuccess": "Gửi thông báo thành công cho {numberOfAttendees} người tham gia!!!",
+      "CancelAttendeeSuccess": "Hủy vé thành công!!!",
+      "RestoreAttendeeSuccess": "Khôi phục vé thành công!!!"
+    }
+  },
+  "MessageStatus": {
+    "New": "Mới tạo",
+    "Sending": "Đang gửi",
+    "Failed": "Gửi thất bại",
+    "Succeeded": "Chờ kết quả",
+    "UserReceived": "Gửi thành công",
+    "Waiting": "Chờ gửi",
+    "Cancelled": "Đã hủy"
   }
 }

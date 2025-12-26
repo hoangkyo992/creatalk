@@ -74,6 +74,12 @@ public class Upload
                 .Select(c => c.Name.ToLower())
                 .ToListAsync(cancellationToken);
 
+            var folder = await appContext.Folders.Where(x => x.Id == folderId)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(cancellationToken);
+            if (folder is null)
+                return new FailResult<Result>(ErrorMessages.FOLDER_NOT_FOUND, HttpStatusCode.NotFound);
+
             var maxFileCountPerFolder = configuration.GetValue("MaxFileCountPerFolder", 999);
             if (existedFileNames.Count > maxFileCountPerFolder)
             {
@@ -101,6 +107,11 @@ public class Upload
                         { "extension", extension }
                     });
                 }
+                var throwIfFileNameExists = configuration.GetValue("ThrowIfFileNameExists", false);
+                if (throwIfFileNameExists && existedFileNames.Contains(file.FileName.ToLowerInvariant()))
+                {
+                    return new FailResult<Result>(ErrorMessages.FILE_NAME_EXISTED, "name", file.FileName, HttpStatusCode.NotAcceptable);
+                }
 
                 var fileName = GetFileName(file.FileName, existedFileNames, maxFileCountPerFolder);
                 var newFile = new Domain.Entities.File
@@ -126,7 +137,8 @@ public class Upload
             await mediator.Publish(new OnFileUploadedEvent
             {
                 FileIds = [.. files.Select(c => c.Id)],
-                FolderId = folderId
+                FolderId = folderId,
+                FolderName = folder.Name
             }.SetCurrentUser(currentUser), cancellationToken);
 
             var result = new Result
@@ -152,7 +164,7 @@ public class Upload
 
         private async Task<long> CreateRoot(CancellationToken cancellationToken)
         {
-            var folder = await appContext.Folders.Where(c => c.Name == "Root").FirstOrDefaultAsync(cancellationToken);
+            var folder = await appContext.Folders.Where(c => c.Name == FolderConstants.RootFolderName).FirstOrDefaultAsync(cancellationToken);
             if (folder == null)
             {
                 folder = new Folder
@@ -179,7 +191,7 @@ public class Upload
             var extension = Path.GetExtension(newFileName);
             var name = Path.GetFileNameWithoutExtension(newFileName);
             if (name.Length > 72)
-                name = name.Substring(0, 71);
+                name = name[..71];
 
             if (existedFileNames.Contains(fileName.ToLowerInvariant()))
             {

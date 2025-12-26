@@ -4,24 +4,28 @@ public class OnFileDeletedEvent : ApplicationEvent
 {
     public IEnumerable<long> FileIds { get; init; }
     public long FolderId { get; init; }
+    public string FolderName { get; init; }
 }
 
 public class OnFileUploadedEvent : ApplicationEvent
 {
     public IEnumerable<long> FileIds { get; init; }
     public long FolderId { get; init; }
+    public string FolderName { get; init; }
 }
 
 public class OnFileMovedEvent : ApplicationEvent
 {
     public IEnumerable<long> FileIds { get; init; }
     public long FolderId { get; init; }
+    public string FolderName { get; init; }
 }
 
 public class OnFileRenamedEvent : ApplicationEvent
 {
     public IEnumerable<long> FileIds { get; init; }
     public long FolderId { get; init; }
+    public string FolderName { get; init; }
 }
 
 public class OnFileMoveToTrashEvent : ApplicationEvent

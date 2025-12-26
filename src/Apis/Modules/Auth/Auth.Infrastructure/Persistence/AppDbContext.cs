@@ -33,5 +33,8 @@ public partial class AppDbContext(DbContextOptions<AppDbContext> options,
     {
         modelBuilder.ApplyConfiguration(new SequencesConfiguration());
         base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<LogEntity>().HasQueryFilter(p => p.TenantId == TenantId);
+        modelBuilder.Entity<LogActivity>().HasQueryFilter(p => p.TenantId == TenantId);
+        modelBuilder.Entity<LogRelatedEntity>().HasQueryFilter(p => p.TenantId == TenantId);
     }
 }

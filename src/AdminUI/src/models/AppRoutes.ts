@@ -19,37 +19,11 @@ enum AppRoutes {
   Cdn_Albums = "cdn-albums",
 
   Cms = "cms",
-  Cms_Pages = "cms-pages",
-  Cms_PageId = "cms-pages-[id]",
-  Cms_Posts = "cms-posts",
-  Cms_PostId = "cms-posts-[id]",
-  Cms_News = "cms-posts-news",
-  Cms_NewsId = "cms-posts-news-[id]",
-  Cms_Products = "cms-posts-products",
-  Cms_ProductId = "cms-posts-products-[id]",
-  Cms_Projects = "cms-posts-projects",
-  Cms_ProjectId = "cms-posts-projects-[id]",
-  Cms_Factories = "cms-posts-factories",
-  Cms_FactoryId = "cms-posts-factories-[id]",
-  Cms_Sections = "cms-posts-sections",
-  Cms_SectionId = "cms-posts-sections-[id]",
-  Cms_Jobs = "cms-posts-jobs",
-  Cms_JobId = "cms-posts-jobs-[id]",
-  Cms_Events = "cms-posts-events",
-  Cms_EventId = "cms-posts-events-[id]",
-  Cms_Templates = "cms-templates",
-  Cms_Languages = "cms-languages",
-  Cms_Attributes = "cms-attributes",
-  Cms_UIComponents = "cms-ui-components",
-  Cms_Tags = "cms-tags",
-  Cms_Menus = "cms-menus",
-  Cms_Categories = "cms-categories",
-
-  Rms = "rms",
-  Rms_Candidates = "rms-candidates",
-
-  Crm = "crm",
-  Crm_Contacts = "crm-contacts"
+  Cms_Tickets = "cms-tickets",
+  Cms_Attendees = "cms-attendees",
+  Cms_New_Attendees = "cms-attendees-new",
+  Cms_Cancelled_Attendees = "cms-attendees-cancelled",
+  Cms_MessageProviders = "cms-message-providers"
 }
 
 export default AppRoutes;

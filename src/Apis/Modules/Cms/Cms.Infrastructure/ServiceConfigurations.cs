@@ -1,6 +1,9 @@
 ﻿using Cms.Application.Common;
+using Cms.Application.Services;
+using Cms.Application.Services.Abstractions;
 using Cms.Domain.Shared;
 using Cms.Infrastructure.Persistence;
+using Cms.Infrastructure.Services;
 using Common.Application.Services;
 using Common.Infrastructure.Services;
 using Common.Infrastructure.Services.ActivityLog;
@@ -18,7 +21,15 @@ public static partial class ServiceConfigurations
         services.AddHttpClient();
         services.AddScoped<IActivityLogService, ActivityLogService>();
         services.AddTransient<IFeatureProvider, FeatureProvider>();
+        services.AddSingleton<IQueueService, UnboundedChannelQueueService>();
+
+        services.AddKeyedSingleton<IMessageSender, ZnsMessageSender>("ZNS");
+
         AddCmsDbContext(services, configuration);
+
+        services.AddHostedService<SendMessageBackgroundService>();
+        services.AddHostedService<EnqueueMessagesBackgroundService>();
+
         return services;
     }
 

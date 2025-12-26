@@ -15,6 +15,8 @@ public class LogEntity
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public long Id { get; set; }
 
+    public long TenantId { get; set; }
+
     public long ActivityId { get; set; }
 
     [Required]

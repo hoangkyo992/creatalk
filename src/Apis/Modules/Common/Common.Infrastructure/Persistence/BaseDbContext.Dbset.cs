@@ -10,6 +10,13 @@ public abstract partial class BaseDbContext
         DatetimeConverter.UseUTCDatetimeConversion(modelBuilder);
 
         var dbSets = GetDbSetProperties(this);
+        foreach (var method in from type in GetEntityTypes(typeof(TenantBaseEntity))
+                               where dbSets.Any(c => c.Value.Equals(type))
+                               let method = SetTenantGlobalQueryMethod.MakeGenericMethod(type)
+                               select method)
+        {
+            method.Invoke(this, [modelBuilder]);
+        }
         foreach (var method in from type in GetEntityTypes(typeof(BaseEntity))
                                where dbSets.Any(c => c.Value.Equals(type))
                                let method = SetGlobalQueryMethod.MakeGenericMethod(type)

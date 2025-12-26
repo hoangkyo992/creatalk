@@ -459,6 +459,7 @@ public static partial class ServiceConfigurations
                 }
             });
 
+        app.UseMiddleware<TenantIdentificationMiddleware>();
         app.UseMiddleware<TimeZoneMiddleware>();
         app.UseRateLimiter();
     }
@@ -499,15 +500,8 @@ public static partial class ServiceConfigurations
             options.Providers.Add<BrotliCompressionProvider>();
             options.Providers.Add<GzipCompressionProvider>();
         });
-        builder.Services.Configure<BrotliCompressionProviderOptions>(options =>
-        {
-            options.Level = CompressionLevel.SmallestSize;
-        });
-
-        builder.Services.Configure<GzipCompressionProviderOptions>(options =>
-        {
-            options.Level = CompressionLevel.SmallestSize;
-        });
+        builder.Services.Configure<BrotliCompressionProviderOptions>(options => options.Level = CompressionLevel.SmallestSize);
+        builder.Services.Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.SmallestSize);
 
         if (builder.Configuration.GetValue("UseSentry", false))
         {

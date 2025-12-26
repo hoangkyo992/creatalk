@@ -1,7 +1,7 @@
 namespace Cdn.Domain.Entities;
 
 [Table("FileExtension", Schema = DbConstants.SchemaName)]
-public class FileExtension : BaseEntity
+public class FileExtension : TenantBaseEntity
 {
     public FileExtension()
     {

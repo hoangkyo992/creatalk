@@ -8,6 +8,24 @@ namespace Cdn.Api.Controllers;
 [EnableRateLimiting(nameof(RateLimitPolicy.IdentityFixed))]
 public class FilesController(IMediator mediator) : ControllerBase
 {
+    [HttpGet("statistics")]
+    [ProducesResponseType(typeof(ApiResult<Statistics.Result>), (int)HttpStatusCode.OK)]
+    [CheckRights(FeatureCodes.Cdn.Library, ActionCodes.View)]
+    public async Task<IActionResult> GetStatisticsAsync([FromQuery] Statistics.Request request, CancellationToken cancellationToken = default)
+    {
+        var result = await mediator.Send(request, cancellationToken);
+        return Ok(result);
+    }
+
+    [HttpGet(""), MapToApiVersion(ApiConstants.Ver1_0)]
+    [ProducesResponseType(typeof(ApiResult<ListItem.Result>), (int)HttpStatusCode.OK)]
+    [CheckRights(FeatureCodes.Cdn.Library, ActionCodes.View)]
+    public async Task<IActionResult> ListAsync([FromQuery] ListItem.Request request)
+    {
+        var result = await mediator.Send(request);
+        return Ok(result);
+    }
+
     [HttpGet("{id}")]
     [ProducesResponseType(typeof(ApiResult<GetItem.Result>), (int)HttpStatusCode.OK)]
     [CheckRights(FeatureCodes.Cdn.Library, ActionCodes.View)]
@@ -21,7 +39,7 @@ public class FilesController(IMediator mediator) : ControllerBase
 
     [HttpPost("upload")]
     [ProducesResponseType(typeof(ApiResult<Upload.Result>), (int)HttpStatusCode.OK)]
-    [CheckRights(FeatureCodes.Cdn.Library, ActionCodes.Upload)]
+    [CheckRights(FeatureCodes.Cdn.Library, ActionCodes.Upload, ActionCodes.Import)]
     public async Task<IActionResult> UploadAsync(IEnumerable<IFormFile> files,
         [ZCodeToInt64] long? folderId,
         CancellationToken cancellationToken = default)

@@ -1,7 +1,7 @@
 namespace Cdn.Domain.Entities;
 
 [Table("Folder", Schema = DbConstants.SchemaName)]
-public class Folder : BaseEntity
+public class Folder : TenantBaseEntity
 {
     public Folder()
     {

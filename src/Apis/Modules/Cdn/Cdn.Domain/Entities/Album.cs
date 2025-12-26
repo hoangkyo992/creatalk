@@ -1,7 +1,7 @@
 namespace Cdn.Domain.Entities;
 
 [Table("Album", Schema = DbConstants.SchemaName)]
-public class Album : BaseEntity
+public class Album : TenantBaseEntity
 {
     public Album()
     {

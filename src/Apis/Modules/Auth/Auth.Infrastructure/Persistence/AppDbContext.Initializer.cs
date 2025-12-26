@@ -1,5 +1,4 @@
-﻿using System.Net.WebSockets;
-using Auth.Application.Common;
+﻿using Auth.Application.Common;
 using Auth.Application.Shared;
 using Auth.Application.Shared.Settings;
 using Auth.Domain.Entities;

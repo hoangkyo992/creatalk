@@ -25,189 +25,57 @@ onMounted(async () => {
     },
     {
       label: "Breadcrumb.Cms.ModuleName",
-      features: [
-        "Cms.Pages",
-        "Cms.Projects",
-        "Cms.Products",
-        "Cms.News",
-        "Cms.Jobs",
-        "Cms.Events",
-        "Cms.Factories",
-        "Cms.Sections",
-        "Cms.Categories",
-        "Cms.Languages",
-        "Cms.Tags",
-        "Cms.UIComponents",
-        "Cms.Menus",
-        "Cms.Attributes",
-        "Cms.Templates"
-      ],
+      features: ["Cms.Tickets", "Cms.Attendees", "Cms.MessageProviders"],
       separator: false,
       items: [
         {
-          label: "Breadcrumb.Cms.Pages",
-          features: ["Cms.Pages"],
+          label: "Breadcrumb.Cms.Tickets",
+          features: ["Cms.Tickets"],
           separator: false,
-          icon: "pi pi-fw pi-external-link",
-          to: { name: AppRoutes.Cms_Pages }
+          icon: "pi pi-fw pi-ticket",
+          to: { name: AppRoutes.Cms_Tickets }
         },
         {
-          label: "Breadcrumb.Cms.Posts.ModuleName",
-          features: ["Cms.Projects", "Cms.Products", "Cms.News", "Cms.Jobs", "Cms.Events"],
+          label: "Breadcrumb.Cms.Attendees",
+          features: ["Cms.Attendees"],
           separator: false,
-          icon: "pi pi-fw pi-pen-to-square",
+          icon: "pi pi-fw pi-user",
           items: [
             {
-              label: "Breadcrumb.Cms.Posts.Events",
-              features: ["Cms.Events"],
+              label: "Breadcrumb.Cms.NewAttendees",
+              features: ["Cms.Attendees"],
               separator: false,
-              icon: "",
-              to: { name: AppRoutes.Cms_Events }
+              icon: "pi pi-fw pi-sparkles",
+              to: { name: AppRoutes.Cms_New_Attendees }
             },
             {
-              label: "Breadcrumb.Cms.Posts.Jobs",
-              features: ["Cms.Jobs"],
+              label: "Breadcrumb.Cms.SentAttendees",
+              features: ["Cms.Attendees"],
               separator: false,
-              icon: "",
-              to: { name: AppRoutes.Cms_Jobs }
+              icon: "pi pi-fw pi-send",
+              to: { name: AppRoutes.Cms_Attendees }
             },
             {
-              label: "Breadcrumb.Cms.Posts.News",
-              features: ["Cms.News"],
+              label: "Breadcrumb.Cms.CancelledAttendees",
+              features: ["Cms.Attendees"],
               separator: false,
-              icon: "",
-              to: { name: AppRoutes.Cms_News }
-            },
-            {
-              label: "Breadcrumb.Cms.Posts.Products",
-              features: ["Cms.Products"],
-              separator: false,
-              icon: "",
-              to: { name: AppRoutes.Cms_Products }
-            },
-            {
-              label: "Breadcrumb.Cms.Posts.Projects",
-              features: ["Cms.Projects"],
-              separator: false,
-              icon: "",
-              to: { name: AppRoutes.Cms_Projects }
-            },
-            {
-              label: "Breadcrumb.Cms.Posts.Factories",
-              features: ["Cms.Factories"],
-              separator: false,
-              icon: "",
-              to: { name: AppRoutes.Cms_Factories }
+              icon: "pi pi-fw pi-times-circle",
+              to: { name: AppRoutes.Cms_Cancelled_Attendees }
             }
           ]
-        },
-        {
-          label: "Breadcrumb.Cms.Categories",
-          features: ["Cms.Categories"],
-          separator: false,
-          icon: "pi pi-fw pi-sparkles",
-          to: { name: AppRoutes.Cms_Categories }
-        },
-        {
-          label: "Breadcrumb.Cms.Tags",
-          features: ["Cms.Tags"],
-          separator: false,
-          icon: "pi pi-fw pi-hashtag",
-          to: { name: AppRoutes.Cms_Tags }
-        },
-        {
-          label: "Breadcrumb.Cms.Languages",
-          features: ["Cms.Languages"],
-          separator: false,
-          icon: "pi pi-fw pi-language",
-          to: { name: AppRoutes.Cms_Languages }
-        },
-        {
-          label: "Breadcrumb.Cms.Attributes",
-          features: ["Cms.Attributes"],
-          separator: false,
-          icon: "pi pi-fw pi-list",
-          to: { name: AppRoutes.Cms_Attributes }
-        },
-        {
-          label: "Breadcrumb.Cms.Templates",
-          features: ["Cms.Templates"],
-          separator: false,
-          icon: "pi pi-fw pi-expand",
-          to: { name: AppRoutes.Cms_Templates }
-        },
-        {
-          label: "Breadcrumb.Cms.UIComponents",
-          features: ["Cms.UIComponents"],
-          separator: false,
-          icon: "pi pi-fw pi pi-compass",
-          to: { name: AppRoutes.Cms_UIComponents }
-        },
-        {
-          label: "Breadcrumb.Cms.Posts.Sections",
-          features: ["Cms.Sections"],
-          separator: false,
-          icon: "pi pi-fw pi-th-large",
-          to: { name: AppRoutes.Cms_Sections }
-        },
-        {
-          label: "Breadcrumb.Cms.Menus",
-          features: ["Cms.Menus"],
-          separator: false,
-          icon: "pi pi-fw pi-bars",
-          to: { name: AppRoutes.Cms_Menus }
         }
-      ]
-    },
-    {
-      label: "Breadcrumb.Rms.ModuleName",
-      features: ["Rms.Candidates"],
-      separator: false,
-      items: [
-        {
-          label: "Breadcrumb.Rms.Dashboard",
-          features: ["Rms.Candidates"],
-          separator: false,
-          icon: "pi pi-fw pi-chart-bar",
-          badge: 0,
-          to: { name: AppRoutes.Rms }
-        },
-        {
-          label: "Breadcrumb.Rms.Candidates",
-          features: ["Rms.Candidates"],
-          separator: false,
-          icon: "pi pi-fw pi-check-square",
-          badge: 0,
-          to: { name: AppRoutes.Rms_Candidates }
-        }
-      ]
-    },
-    {
-      label: "Breadcrumb.Crm.ModuleName",
-      features: ["Crm.Contacts"],
-      separator: false,
-      items: [
-        {
-          label: "Breadcrumb.Crm.Dashboard",
-          features: ["Crm.Contacts"],
-          separator: false,
-          icon: "pi pi-fw pi-chart-pie",
-          badge: 0,
-          to: { name: AppRoutes.Crm }
-        },
-        {
-          label: "Breadcrumb.Crm.Contacts",
-          features: ["Crm.Contacts"],
-          separator: false,
-          icon: "pi pi-fw pi-address-book",
-          badge: 0,
-          to: { name: AppRoutes.Crm_Contacts }
-        }
+        // {
+        //   label: "Breadcrumb.Cms.MessageProviders",
+        //   features: ["Cms.MessageProviders"],
+        //   separator: false,
+        //   icon: "pi pi-fw pi-hashtag",
+        //   to: { name: AppRoutes.Cms_MessageProviders }
+        // }
       ]
     },
     {
       label: "Breadcrumb.Cdn.ModuleName",
-      features: ["Cdn.Library"],
+      features: ["Cdn.Library", "Cdn.Albums"],
       separator: false,
       items: [
         {

@@ -1,8 +1,13 @@
 import type { FileItemDto, FileMoveRequestDto, FileRenameRequestDto, UploadImagesResponseDto } from "@/contracts/FileAndFolders";
-import type { ApiResult, EmptyResultDto } from "../contracts/Common";
+import type { ApiResult, DataSourceRequestDto, DataSourceResultDto, EmptyResultDto } from "../contracts/Common";
 import HttpService from "../plugins/httpService";
 
 class FileService extends HttpService {
+  public async getList(query: DataSourceRequestDto): Promise<ApiResult<DataSourceResultDto<FileItemDto>>> {
+    const result = await this.cmsClient.get<ApiResult<DataSourceResultDto<FileItemDto>>>(`/api/files`, { params: query });
+    return result.data;
+  }
+
   public async upload(folderId: string, files: File[]): Promise<ApiResult<UploadImagesResponseDto>> {
     const formData = new FormData();
     files.forEach((element) => {

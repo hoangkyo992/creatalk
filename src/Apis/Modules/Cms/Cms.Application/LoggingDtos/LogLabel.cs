@@ -9,4 +9,8 @@ public enum LogLabel
     CreateAttendee = 1011,
     UpdateAttendee = 1012,
     DeleteAttendee = 1013,
+    CancelAttendee = 1014,
+    RestoreAttendee = 1015,
+
+    CreateAttendeeMessages = 1021,
 }

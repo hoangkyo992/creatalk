@@ -7,4 +7,5 @@ public static class ActionCodes
     public const string Update = nameof(Update);
     public const string Delete = nameof(Delete);
     public const string Import = nameof(Import);
+    public const string CreateMessages = nameof(CreateMessages);
 }

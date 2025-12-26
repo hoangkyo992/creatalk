@@ -72,9 +72,14 @@ export enum LogLabel {
   CreateSetting,
   UpdateSetting,
   DeleteSetting,
+  CreateAlbum,
+  UpdateAlbum,
+  DeleteAlbum,
   CreateAttendee,
   UpdateAttendee,
   DeleteAttendee,
+  CancelAttendee,
+  RestoreAttendee,
   CreateMessageProvider,
   UpdateMessageProvider,
   DeleteMessageProvider
@@ -120,7 +125,7 @@ export const FileStatusOptions: {
   text: string;
   value: string;
 }[] = Object.entries(FileStatus).map(([text, value]) => ({
-  text: `FolderStatus.${text}`,
+  text: `FileStatus.${text}`,
   value: value
 }));
 
@@ -131,3 +136,32 @@ export enum FileType {
   Video = "Video",
   Document = "Document"
 }
+
+export enum AttendeeStatus {
+  Cancelled = "Cancelled",
+  Default = "Default"
+}
+
+export const AttendeeStatusOptions: {
+  text: string;
+  value: string;
+}[] = Object.entries(AttendeeStatus).map(([text, value]) => ({
+  text: `AttendeeStatus.${text}`,
+  value: value
+}));
+
+export enum MessageStatus {
+  New = "New",
+  Sending = "Sending",
+  Succeeded = "Succeeded",
+  Failed = "Failed",
+  UserReceived = "UserReceived"
+}
+
+export const MessageStatusOptions: {
+  text: string;
+  value: string;
+}[] = Object.entries(MessageStatus).map(([text, value]) => ({
+  text: `MessageStatus.${text}`,
+  value: value
+}));

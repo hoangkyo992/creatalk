@@ -20,6 +20,8 @@ public class AnonymousUser : ICurrentUser
 
     public bool IsRobot => false;
 
+    public long TenantId => 0;
+
     public TimeSpan ClientDateTimeOffset => throw new NotImplementedException();
 
     public bool IsSystemUser => throw new NotImplementedException();

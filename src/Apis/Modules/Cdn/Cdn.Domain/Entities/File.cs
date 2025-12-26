@@ -3,7 +3,7 @@
 namespace Cdn.Domain.Entities;
 
 [Table("File", Schema = DbConstants.SchemaName)]
-public class File : BaseEntity
+public class File : TenantBaseEntity
 {
     public File()
     {

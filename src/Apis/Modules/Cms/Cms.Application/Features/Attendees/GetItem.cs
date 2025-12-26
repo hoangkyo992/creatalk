@@ -1,4 +1,7 @@
-﻿namespace Cms.Application.Features.Attendees;
+﻿using Cdn.Application.Shared.Configurations;
+using Microsoft.Extensions.Options;
+
+namespace Cms.Application.Features.Attendees;
 
 public class GetItem
 {
@@ -16,9 +19,12 @@ public class GetItem
         public string Email { get; init; }
         public string PhoneNumber { get; init; }
         public string TicketNumber { get; init; }
+        public AttendeeStatus StatusId { get; init; }
 
         [JsonConverter(typeof(ZCodeJsonConverter))]
         public long TicketId { get; init; }
+
+        public string TicketUrl { get; set; }
 
         public IEnumerable<MessageItem> Messages { get; init; } = [];
     }
@@ -27,7 +33,7 @@ public class GetItem
     {
         public string ProviderCode { get; init; }
         public string ProviderName { get; init; }
-        public int StatusId { get; init; }
+        public MessageStatus StatusId { get; init; }
     }
 
     public class Validator : AbstractValidator<Request>
@@ -40,7 +46,7 @@ public class GetItem
         }
     }
 
-    public class Handler(IAppContext appContext) : IRequestHandler<Request, ApiResult<Result>>
+    public class Handler(IAppContext appContext, IOptions<CdnServerConfiguration> options) : IRequestHandler<Request, ApiResult<Result>>
     {
         public async Task<ApiResult<Result>> Handle(Request request, CancellationToken cancellationToken)
         {
@@ -55,6 +61,7 @@ public class GetItem
                     PhoneNumber = c.PhoneNumber,
                     TicketId = c.TicketId,
                     TicketNumber = c.TicketNumber,
+                    StatusId = c.StatusId,
                     Messages = c.Messages
                         .Select(m => new MessageItem
                         {
@@ -73,9 +80,13 @@ public class GetItem
                     UpdatedTime = c.UpdatedTime
                 }).FirstOrDefaultAsync(cancellationToken);
 
-            return item == null
-                ? new FailResult<Result>(ErrorMessages.ATTENDEE_NOT_FOUND, HttpStatusCode.NotFound)
-                : new SuccessResult<Result>(item);
+            if (item is null)
+                return new FailResult<Result>(ErrorMessages.ATTENDEE_NOT_FOUND, HttpStatusCode.NotFound);
+
+            if (item.TicketId > 0)
+                item.TicketUrl = $"{options.Value.PublicPath}/files/{ZCode.Get(item.TicketId)}";
+
+            return new SuccessResult<Result>(item);
         }
     }
 }

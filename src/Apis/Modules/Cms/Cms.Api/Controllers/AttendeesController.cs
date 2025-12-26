@@ -34,4 +34,24 @@ public class AttendeesController(IMediator mediator) : ControllerBase
         var result = await mediator.Send(command);
         return Ok(result);
     }
+
+    [HttpPost("{id}/cancel"), MapToApiVersion(ApiConstants.Ver1_0)]
+    [ProducesResponseType(typeof(ApiResult<Cancel.Result>), (int)HttpStatusCode.OK)]
+    [CheckRights(FeatureCodes.Cms.Attendees, ActionCodes.Update)]
+    public async Task<IActionResult> UpdateFeaturesAsync([FromRoute][ZCodeToInt64] long id,
+        [FromBody] Cancel.Command command, CancellationToken cancellationToken = default)
+    {
+        command.Id = id;
+        var result = await mediator.Send(command, cancellationToken);
+        return Ok(result);
+    }
+
+    [HttpPost("messages"), MapToApiVersion(ApiConstants.Ver1_0)]
+    [ProducesResponseType(typeof(ApiResult<CreateMessages.Result>), (int)HttpStatusCode.OK)]
+    [CheckRights(FeatureCodes.Cms.Attendees, ActionCodes.CreateMessages)]
+    public async Task<IActionResult> CreateMessagesAsync([FromBody] CreateMessages.Command command)
+    {
+        var result = await mediator.Send(command);
+        return Ok(result);
+    }
 }

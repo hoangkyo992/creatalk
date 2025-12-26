@@ -98,7 +98,7 @@ public class Activities
                     .ToListAsync(cancellationToken);
                 foreach (var item in data.Data)
                 {
-                    item.LogEntities = entities.Where(c => c.ActivityId == item.Id).ToList();
+                    item.LogEntities = [.. entities.Where(c => c.ActivityId == item.Id)];
                 }
             }
 

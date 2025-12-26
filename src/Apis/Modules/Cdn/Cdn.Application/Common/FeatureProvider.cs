@@ -23,7 +23,8 @@ public class FeatureProvider : IFeatureProvider
                 new(ActionCodes.Rename, "Rename existing files/folders"),
                 new(ActionCodes.Move, "Move files/folders"),
                 new(ActionCodes.Upload, "Upload files"),
-                new(ActionCodes.GrantAccess, "Grant access"),
+                new(ActionCodes.Import, "Import files"),
+                new(ActionCodes.GrantAccess, "Grant access")
             ])
         ];
     }

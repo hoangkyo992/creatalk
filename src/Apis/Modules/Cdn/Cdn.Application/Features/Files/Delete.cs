@@ -31,6 +31,7 @@ public class Delete
             var item = await appContext.Files
                 .Where(c => c.Id == command.Id)
                 .Where(c => c.StatusId == FileStatus.IsInTrash)
+                .Include(c => c.Folder)
                 .FirstOrDefaultAsync(cancellationToken);
             if (item == null)
                 return new FailResult<Result>(ErrorMessages.FILE_NOT_FOUND, HttpStatusCode.NotFound);
@@ -41,7 +42,8 @@ public class Delete
             await mediator.Publish(new OnFileDeletedEvent
             {
                 FileIds = [item.Id],
-                FolderId = item.FolderId
+                FolderId = item.FolderId,
+                FolderName = item.Folder.Name
             }.SetCurrentUser(currentUser), cancellationToken);
 
             return new SuccessResult<Result>(new Result());

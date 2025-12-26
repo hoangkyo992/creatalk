@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Cdn\Cdn.Application.Shared\Cdn.Application.Shared.csproj" />
     <ProjectReference Include="..\..\Common\Common.Application\Common.Application.csproj" />
     <ProjectReference Include="..\Cms.Application.Shared\Cms.Application.Shared.csproj" />
     <ProjectReference Include="..\Cms.Domain\Cms.Domain.csproj" />
@@ -10,8 +11,6 @@
     <Folder Include="Common\Interfaces\" />
     <Folder Include="Common\Models\" />
     <Folder Include="Configurations\" />
-    <Folder Include="EventHandlers\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>

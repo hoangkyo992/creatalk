@@ -609,6 +609,14 @@ const onSelect = () => {
       max-width: 256px;
       padding: 8px;
       background-color: rgb(255 255 255);
+
+      .directory-details {
+        .directory-name {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          word-break: break-all;
+        }
+      }
     }
   }
 

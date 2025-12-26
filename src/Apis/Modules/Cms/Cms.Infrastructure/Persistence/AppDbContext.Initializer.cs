@@ -1,6 +1,6 @@
-﻿using Cdn.Application.Shared.Configurations;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Cms.Domain.Entities;
+using HungHd.Shared;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Npgsql;
 using Polly;
@@ -22,15 +22,34 @@ public class AppDbContextInitializer
     public async Task SeedAsync(AppDbContext context, IServiceProvider serviceProvider, ILogger<AppDbContextInitializer> logger)
     {
         ArgumentNullException.ThrowIfNull(context);
-        var configuration = serviceProvider.GetRequiredService<IConfiguration>();
-        var cdnServerOptions = new CdnServerConfiguration();
-        IConfigurationSection cdnServerConfigSection = configuration.GetSection(CdnServerConfiguration.ConfigSection);
-        cdnServerConfigSection.Bind(cdnServerOptions);
 
         var policy = CreatePolicy(logger, nameof(AppDbContextInitializer));
         await policy.ExecuteAsync(async () =>
         {
-            await Task.CompletedTask;
+            if (!await context.MessageProviders.AnyAsync())
+            {
+                context.MessageProviders.Add(new MessageProvider
+                {
+                    Id = IDGenerator.GenerateId(),
+                    CreatedBy = "System",
+                    CreatedTime = DateTime.UtcNow,
+                    Name = "Email",
+                    Code = "Email",
+                    Settings = "",
+                    IsDisabled = true
+                });
+                context.MessageProviders.Add(new MessageProvider
+                {
+                    Id = IDGenerator.GenerateId(),
+                    CreatedBy = "System",
+                    CreatedTime = DateTime.UtcNow,
+                    Name = "ZNS",
+                    Code = "ZNS",
+                    Settings = "",
+                    IsDisabled = false
+                });
+                await context.SaveChangesAsync();
+            }
         });
     }
 }

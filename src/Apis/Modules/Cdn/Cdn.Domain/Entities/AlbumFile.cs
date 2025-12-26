@@ -3,7 +3,7 @@ using System.ComponentModel;
 namespace Cdn.Domain.Entities;
 
 [Table("AlbumFile", Schema = DbConstants.SchemaName)]
-public class AlbumFile : BaseEntity
+public class AlbumFile : TenantBaseEntity
 {
     public AlbumFile()
     {

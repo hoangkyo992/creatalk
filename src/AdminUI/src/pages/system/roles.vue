@@ -57,7 +57,7 @@ meta:
         @filter="tabler.onFilter($event, fetchData)"
       >
         <template #empty>
-          <div v-if="!isLoading" class="text-center">{{ $t("Common.Messages.NoData") }}</div>
+          <div v-if="!isLoading" class="text-center py-4">{{ $t("Common.Messages.NoData") }}</div>
         </template>
         <template #paginatorstart>
           <Button

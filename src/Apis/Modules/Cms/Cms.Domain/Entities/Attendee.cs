@@ -1,7 +1,9 @@
-﻿namespace Cms.Domain.Entities;
+﻿using Cms.Domain.Shared.Enums;
+
+namespace Cms.Domain.Entities;
 
 [Table("Attendee", Schema = DbConstants.SchemaName)]
-public class Attendee : BaseEntity
+public class Attendee : TenantBaseEntity
 {
     [Required]
     [MaxLength(AttendeeConstants.ColumnsMaxLength.FirstName)]
@@ -10,6 +12,10 @@ public class Attendee : BaseEntity
     [Required]
     [MaxLength(AttendeeConstants.ColumnsMaxLength.LastName)]
     public string LastName { get; set; }
+
+    [Required]
+    [MaxLength(AttendeeConstants.ColumnsMaxLength.FullName)]
+    public string FullName { get; set; }
 
     [Required]
     [MaxLength(AttendeeConstants.ColumnsMaxLength.Email)]
@@ -24,7 +30,14 @@ public class Attendee : BaseEntity
     [MaxLength(AttendeeConstants.ColumnsMaxLength.TicketNumber)]
     public string TicketNumber { get; set; }
 
+    [Required]
+    [DefaultValue("")]
+    [MaxLength(AttendeeConstants.ColumnsMaxLength.TicketZone)]
+    public string TicketZone { get; set; }
+
     public long TicketId { get; set; }
+
+    public AttendeeStatus StatusId { get; set; }
 
     public virtual ICollection<AttendeeMessage> Messages { get; set; } = [];
 }

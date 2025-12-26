@@ -14,3 +14,9 @@ public class OnAttendeeDeletedEvent : ApplicationEvent
 {
     public IEnumerable<long> Ids { get; set; }
 }
+
+public class OnAttendeeCancelledEvent : ApplicationEvent
+{
+    public IEnumerable<long> Ids { get; set; }
+    public bool IsCancelled { get; set; }
+}

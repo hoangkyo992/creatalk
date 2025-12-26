@@ -2,7 +2,6 @@
 using System.Reflection;
 using Common.Domain.Common;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyModel;
 
@@ -12,6 +11,14 @@ public abstract partial class BaseDbContext
 {
     protected readonly ICurrentUser? _currentUser;
     protected readonly IServiceProvider _serviceProvider;
+
+    protected long TenantId
+    {
+        get
+        {
+            return (_currentUser?.Id > 0 ? _currentUser : _serviceProvider.GetRequiredService<ICurrentUser>()).TenantId;
+        }
+    }
 
     protected string CurrentUsername
     {
@@ -50,12 +57,17 @@ public abstract partial class BaseDbContext
     private void SetStringEmptyInsteadOfNull()
     {
         string typeofString = typeof(string).Name;
-        foreach (var entry in this.ChangeTracker.Entries<BaseEntity>())
+        foreach (var entry in ChangeTracker.Entries<BaseEntity>())
         {
             if (entry.State == EntityState.Added)
             {
+                if (entry.Entity is TenantBaseEntity e)
+                {
+                    e.TenantId = e.TenantId > 0 ? e.TenantId : TenantId;
+                }
+
                 entry.Entity.CreatedBy = entry.Entity.CreatedBy ?? CurrentUsername;
-                entry.Entity.CreatedTime = DateTime.UtcNow;
+                entry.Entity.CreatedTime = entry.Entity.CreatedTime > DateTime.MinValue ? entry.Entity.CreatedTime : DateTime.UtcNow;
             }
             else if (entry.State == EntityState.Modified)
             {
@@ -86,10 +98,10 @@ public abstract partial class BaseDbContext
 
     protected static IList<Type> GetEntityTypes(Type baseType)
     {
-        return (from a in GetReferencingAssemblies()
+        return [.. (from a in GetReferencingAssemblies()
                 from t in a.DefinedTypes
                 where t.IsSubclassOf(baseType)
-                select t.AsType()).ToList();
+                select t.AsType())];
     }
 
     protected static Dictionary<string, Type> GetDbSetProperties(DbContext context)
@@ -130,12 +142,33 @@ public abstract partial class BaseDbContext
     }
 
     /// <summary>
-    /// Applying BaseEntity rules to all entities that inherit from it.
+    /// Applying TenantBaseEntity rules to all entities that inherit from it.
+    /// Define MethodInfo member that is used when model is built.
+    /// </summary>
+    protected static readonly MethodInfo SetTenantGlobalQueryMethod
+        = typeof(BaseDbContext).GetMethods(BindingFlags.Public | BindingFlags.Instance)
+        .Single(t => t.IsGenericMethod && t.Name == "SetTenantGlobalQuery");
+
+    /// <summary>
+    /// This method is called for every loaded entity type in OnModelCreating method.
+    /// Here type is known through generic parameter and we can use EF Core methods.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="builder"></param>
+    public virtual void SetTenantGlobalQuery<T>(ModelBuilder builder) where T : TenantBaseEntity
+    {
+        builder.Entity<T>().HasQueryFilter(p => !p.IsDeleted && p.Id > int.MaxValue && p.TenantId == TenantId);
+        builder.Entity<T>().UseTpcMappingStrategy();
+    }
+
+    /// <summary>
+    /// Applying TenantBaseEntity rules to all entities that inherit from it.
     /// Define MethodInfo member that is used when model is built.
     /// </summary>
     protected static readonly MethodInfo SetGlobalQueryMethod
         = typeof(BaseDbContext).GetMethods(BindingFlags.Public | BindingFlags.Instance)
         .Single(t => t.IsGenericMethod && t.Name == "SetGlobalQuery");
+
 
     /// <summary>
     /// This method is called for every loaded entity type in OnModelCreating method.

@@ -8,12 +8,19 @@ public class FeatureProvider : IFeatureProvider
     {
         var features = new List<AppFeature>
         {
+            new AppFeature(nameof(FeatureCodes.Cms), FeatureCodes.Cms.Tickets, "Tickets", new List<AppFeatureAction>
+            {
+                new(ActionCodes.View, "View tickets"),
+                new(ActionCodes.Import, "Import tickets"),
+                new(ActionCodes.Delete, "Delete tickets")
+            }),
             new AppFeature(nameof(FeatureCodes.Cms), FeatureCodes.Cms.Attendees, "Attendees", new List<AppFeatureAction>
             {
                 new(ActionCodes.View, "View attendees"),
                 new(ActionCodes.Create, "Create new attendees"),
                 new(ActionCodes.Update, "Update existing attendees"),
-                new(ActionCodes.Delete, "Delete attendees")
+                new(ActionCodes.Delete, "Delete attendees"),
+                new(ActionCodes.CreateMessages, "Create messages")
             }),
             new AppFeature(nameof(FeatureCodes.Cms), FeatureCodes.Cms.MessageProviders, "MessageProviders", new List<AppFeatureAction>
             {

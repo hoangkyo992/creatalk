@@ -13,6 +13,7 @@ public interface ICurrentUser
     string AccessToken { get; }
     bool IsRobot { get; }
     bool IsSystemUser { get; }
+    long TenantId { get; }
 
     TimeSpan ClientDateTimeOffset { get; }
 

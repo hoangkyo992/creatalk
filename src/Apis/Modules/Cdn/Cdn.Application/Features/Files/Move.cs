@@ -72,7 +72,7 @@ public class Move
 
             await appContext.SaveChangesAsync(cancellationToken);
 
-            await mediator.Publish(new OnFileMovedEvent { FileIds = [command.Id], FolderId = command.FolderId }.SetCurrentUser(currentUser), cancellationToken);
+            await mediator.Publish(new OnFileMovedEvent { FileIds = [command.Id], FolderId = command.FolderId, FolderName = folder.Name }.SetCurrentUser(currentUser), cancellationToken);
 
             return new SuccessResult<Result>(new Result
             {
