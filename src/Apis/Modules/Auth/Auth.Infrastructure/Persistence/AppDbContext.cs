@@ -28,6 +28,7 @@ public partial class AppDbContext(DbContextOptions<AppDbContext> options,
     public virtual DbSet<LogEntity> LogEntities { get; set; }
     public virtual DbSet<LogRelatedEntity> LogRelatedEntities { get; set; }
     public virtual DbSet<Setting> Settings { get; set; }
+    public virtual DbSet<Credential> Credentials { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

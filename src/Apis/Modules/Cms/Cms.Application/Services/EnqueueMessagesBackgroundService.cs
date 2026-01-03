@@ -1,6 +1,4 @@
-﻿using Cms.Application.Services.Abstractions;
-
-namespace Cms.Application.Services;
+﻿namespace Cms.Application.Services;
 
 public class EnqueueMessagesBackgroundService(IServiceScopeFactory scopeFactory,
     IQueueService queueService,

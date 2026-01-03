@@ -161,6 +161,14 @@ meta:
         </Column>
       </DataTable>
     </div>
+    <UploadTicketsDialog
+      v-if="showUpload"
+      @close="
+        () => {
+          showUpload = false;
+        }
+      "
+    ></UploadTicketsDialog>
   </div>
 </template>
 

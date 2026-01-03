@@ -15,6 +15,7 @@ public static partial class ServiceConfigurations
         services.AddAutoMapper(assemblies);
         services.AddValidatorsFromAssemblies(assemblies);
         services.AddMediatR(assemblies);
+        services.AddSingleton<ICryptographyService, CryptographyService>();
         services.AddTransient<IFeatureManager, FeatureManager>();
         return services;
     }

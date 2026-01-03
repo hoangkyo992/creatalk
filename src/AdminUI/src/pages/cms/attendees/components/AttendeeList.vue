@@ -54,7 +54,7 @@
             <InputIcon>
               <i class="pi pi-search" />
             </InputIcon>
-            <InputText size="small" v-model="keyword" @keydown.enter="fetchDataHandler" :placeholder="$t('Common.Messages.SearchPlaceholder')" />
+            <InputText size="small" v-model="keyword" @keydown="fetchDataHandler" :placeholder="$t('Common.Messages.SearchPlaceholder')" />
           </IconField>
           <MultiSelect
             v-model="statusIds"
@@ -161,6 +161,19 @@
         />
       </template>
     </Column>
+    <Column field="ticketZone" :header="$t('AttendeesPage.TicketZone')" style="min-width: 100px" sortable>
+      <template #filter="{ filterModel, filterCallback }">
+        <InputText
+          v-model="filterModel.value"
+          fluid
+          type="text"
+          size="small"
+          class="p-column-filter"
+          @blur="filterCallback()"
+          @keydown.enter="filterCallback()"
+        />
+      </template>
+    </Column>
     <Column field="createdTime" :header="$t('Common.CreatedTime')" style="width: 150px" sortable>
       <template #body="{ data }">
         <span v-tooltip="`${formatDate.formatDate(data.createdTime)}`">
@@ -218,6 +231,7 @@
       </template>
     </Column>
   </DataTable>
+  <AttendeeTimelineDialog v-if="selectedItem" :item="selectedItem" :message="findMessage(selectedItem)" @close="selectedItem = null"></AttendeeTimelineDialog>
 </template>
 
 <script lang="ts" setup>

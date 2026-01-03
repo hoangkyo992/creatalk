@@ -1,2 +1,11 @@
 ﻿global using System.ComponentModel.DataAnnotations;
+global using System.Text.Json.Serialization;
+global using Cms.Application.Shared.Configurations;
 global using Cms.Domain.Interfaces;
+global using Common.Infrastructure.ApiClients;
+global using HungHd.Shared;
+global using HungHd.Shared.Utilities;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Logging;
+global using Microsoft.Extensions.Options;
+global using Polly;

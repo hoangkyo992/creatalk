@@ -10,11 +10,18 @@ export interface AttendeeItemDto extends BaseDto {
   statusId: AttendeeStatus;
   ticketNumber: string;
   ticketUrl: string;
+  ticketZone: string;
   messages: AttendeeMessageDto[];
 }
 
 export interface AttendeeMessageDto extends BaseDto {
   providerCode: string;
   providerName: string;
+  sentAt?: Date;
+  userReceivedAt?: Date;
   statusId: MessageStatus;
+  messageId?: string;
+  requestPayload?: string;
+  eventPayload?: string;
+  responsePayload?: string;
 }

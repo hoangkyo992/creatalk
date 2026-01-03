@@ -1,6 +1,4 @@
-﻿using Cms.Application.Services.Abstractions;
-
-namespace Cms.Application.Services;
+﻿namespace Cms.Application.Services;
 
 public class SendMessageBackgroundService(IServiceScopeFactory scopeFactory,
     IQueueService queueService,
@@ -16,32 +14,40 @@ public class SendMessageBackgroundService(IServiceScopeFactory scopeFactory,
                 using var scope = scopeFactory.CreateScope();
                 var appContext = scope.ServiceProvider.GetRequiredService<IAppContext>();
                 var message = await appContext.AttendeeMessages
+                    .IgnoreQueryFilters()
                     .Where(c => c.StatusId == MessageStatus.New)
                     .Where(c => c.Id == id)
+                    .Include(c => c.Attendee)
                     .Include(c => c.Provider)
                     .FirstOrDefaultAsync(stoppingToken);
 
                 if (message is not null)
                 {
                     message.StatusId = MessageStatus.Sending;
-                    await appContext.SaveChangesAsync();
+                    message.SentAt = DateTime.UtcNow;
+                    await appContext.SaveChangesAsync(CancellationToken.None);
 
                     try
                     {
-                        var service = scope.ServiceProvider.GetKeyedService<IMessageSender>(message.Provider.Code);
-                        if (service is null)
-                            throw new NotImplementedException($"The message sender {message.Provider.Code} is not implemented!");
+                        var service = scope.ServiceProvider.GetKeyedService<IMessageSender>(message.Provider.Code)
+                            ?? throw new NotImplementedException($"The message sender {message.Provider.Code} is not implemented!");
 
-                        //await service.SendAsync(id, stoppingToken);
+                        var output = await service.SendAsync(message.Provider, message, CancellationToken.None);
 
-                        message.StatusId = MessageStatus.Succeeded;
-                        await appContext.SaveChangesAsync();
+                        message.StatusId = output.IsSuccess ? MessageStatus.Succeeded : MessageStatus.Failed;
+                        message.MessageId = output.MessageId;
+                        message.RequestPayload = output.RequestPayload;
+                        message.ResponsePayload = output.ResponsePayload;
                     }
                     catch (Exception ex)
                     {
                         message.StatusId = MessageStatus.Failed;
                         message.ResponsePayload = ex.ToString();
-                        await appContext.SaveChangesAsync();
+                    }
+                    finally
+                    {
+                        await appContext.SaveChangesAsync(CancellationToken.None);
+                        await Task.Delay(100, stoppingToken);
                     }
                 }
             }

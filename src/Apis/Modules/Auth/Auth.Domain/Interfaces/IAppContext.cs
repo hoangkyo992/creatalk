@@ -15,4 +15,5 @@ public interface IAppContext : IDbContext, ISeqDbContext
     DbSet<LogEntity> LogEntities { get; }
     DbSet<LogRelatedEntity> LogRelatedEntities { get; }
     DbSet<Setting> Settings { get; }
+    DbSet<Credential> Credentials { get; }
 }

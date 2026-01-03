@@ -1,5 +1,4 @@
 ﻿using Cdn.Application.Shared.Configurations;
-using Microsoft.Extensions.Options;
 
 namespace Cms.Application.Features.Attendees;
 
@@ -15,7 +14,7 @@ public class GetItem
     {
         public string FirstName { get; init; }
         public string LastName { get; init; }
-        public string FullName => $"{LastName} {FirstName}";
+        public string FullName { get; init; }
         public string Email { get; init; }
         public string PhoneNumber { get; init; }
         public string TicketNumber { get; init; }
@@ -25,6 +24,7 @@ public class GetItem
         public long TicketId { get; init; }
 
         public string TicketUrl { get; set; }
+        public string TicketZone { get; init; }
 
         public IEnumerable<MessageItem> Messages { get; init; } = [];
     }
@@ -33,7 +33,13 @@ public class GetItem
     {
         public string ProviderCode { get; init; }
         public string ProviderName { get; init; }
+        public DateTime? SentAt { get; init; }
+        public DateTime? UserReceivedAt { get; init; }
         public MessageStatus StatusId { get; init; }
+        public string? EventPayload { get; init; }
+        public string MessageId { get; init; }
+        public string RequestPayload { get; init; }
+        public string ResponsePayload { get; init; }
     }
 
     public class Validator : AbstractValidator<Request>
@@ -57,10 +63,12 @@ public class GetItem
                     Id = c.Id,
                     FirstName = c.FirstName,
                     LastName = c.LastName,
+                    FullName = c.FullName,
                     Email = c.Email,
                     PhoneNumber = c.PhoneNumber,
                     TicketId = c.TicketId,
                     TicketNumber = c.TicketNumber,
+                    TicketZone = c.TicketZone,
                     StatusId = c.StatusId,
                     Messages = c.Messages
                         .Select(m => new MessageItem
@@ -68,6 +76,12 @@ public class GetItem
                             Id = m.Id,
                             ProviderCode = m.Provider.Code,
                             ProviderName = m.Provider.Name,
+                            SentAt = m.SentAt,
+                            UserReceivedAt = m.UserReceivedAt,
+                            EventPayload = m.EventPayload,
+                            MessageId = m.MessageId,
+                            RequestPayload = m.RequestPayload,
+                            ResponsePayload = m.ResponsePayload,
                             StatusId = m.StatusId,
                             CreatedBy = m.CreatedBy,
                             CreatedTime = m.CreatedTime,

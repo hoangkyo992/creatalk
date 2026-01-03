@@ -33,6 +33,7 @@ public static partial class ServiceConfigurations
     {
         services.AddScoped<ISettingService, HttpSettingService>();
         services.AddScoped<IIdentityService, HttpIdentityService>();
+        services.AddScoped<ICredentialService, HttpCredentialService>();
 
         return services;
     }

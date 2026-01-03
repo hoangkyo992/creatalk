@@ -45,7 +45,14 @@
       "Albums": "Albums",
       "Files": "Files"
     },
-    "Cms": {},
+    "Cms": {
+      "ModuleName": "Ticket management",
+      "Tickets": "Tickets",
+      "Attendees": "Attendees",
+      "NewAttendees": "New",
+      "SentAttendees": "Sent ",
+      "CancelledAttendees": "Cancelled"
+    },
     "Settings": {
       "ModuleName": "Settings",
       "Media": "Media",
@@ -421,6 +428,61 @@
     "SetDefaultLanguage": "Set default language",
     "CreateSetting": "Create setting",
     "UpdateSetting": "Update setting",
-    "DeleteSetting": "Delete setting"
+    "DeleteSetting": "Delete setting",
+    "CreateAttendeeMessages": "Send notification",
+    "CreateAttendee": "Create attendee",
+    "UpdateAttendee": "Update attendee",
+    "DeleteAttendee": "Delete attendee",
+    "RestoreAttendee": "Restore ticket",
+    "CancelAttendee": "Cancel ticket",
+    "CreateMessageProvider": "Create provider",
+    "UpdateMessageProvider": "Update provider",
+    "DeleteMessageProvider": "Delete provider"
+  },
+  "TicketsPage": {
+    "Name": "Name",
+    "Zone": "Zone",
+    "ImportTickets": "Upload tickets",
+    "FilesSelected": "{0} files selected",
+    "Confirmations": {
+      "SaveChangesBeforeExit": "Unprocessed files will be deleted, do you want to continue?"
+    },
+    "Validations": {
+      "ZoneIsRequired": "@:TicketsPage.Zone is required"
+    }
+  },
+  "AttendeesPage": {
+    "FullName": "Full name",
+    "Email": "Email",
+    "PhoneNumber": "Phone number",
+    "MessageStatus": "Status",
+    "TicketZone": "Zone",
+    "OccurredAtBy": "at {0} by {1}",
+    "Actions": {
+      "CreateMessages": "Confirm to send",
+      "ViewTicket": "View ticket",
+      "Cancel": "Cancel ticket",
+      "Restore": "Restore ticket",
+      "ViewLogs": "View timeline"
+    },
+    "Confirmations": {
+      "CreateMessages": "Are you sure you want to send a notification to all event attendees?",
+      "CancelAttendee": "Are you sure you want to cancel the ticket for this attendee?",
+      "RestoreAttendee": "Are you sure you want to restore the ticket for this attendee?"
+    },
+    "Alert": {
+      "CreateMessagesSuccess": "Successfully sent notifications to {numberOfAttendees} attendees!!!",
+      "CancelAttendeeSuccess": "Cancel ticket successfully!!!",
+      "RestoreAttendeeSuccess": "Restore ticket successfully!!!"
+    }
+  },
+  "MessageStatus": {
+    "New": "New",
+    "Sending": "Sending",
+    "Failed": "Failed",
+    "Succeeded": "Succeeded",
+    "UserReceived": "User Received",
+    "Waiting": "Waiting",
+    "Cancelled": "Cancelled"
   }
 }

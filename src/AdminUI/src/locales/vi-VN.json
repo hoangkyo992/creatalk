@@ -438,13 +438,23 @@
   },
   "TicketsPage": {
     "Name": "Tên vé",
-    "Zone": "Vị trí"
+    "Zone": "Vị trí",
+    "ImportTickets": "Tải lên danh sách vé",
+    "FilesSelected": "Đã chọn {0} tập tin",
+    "Confirmations": {
+      "SaveChangesBeforeExit": "Những tập tin chưa xử lý sẽ bị hủy, bạn có muốn tiếp tục?"
+    },
+    "Validations": {
+      "ZoneIsRequired": "@:TicketsPage.Zone không được để trống"
+    }
   },
   "AttendeesPage": {
     "FullName": "Họ và tên",
     "Email": "Email",
     "PhoneNumber": "SĐT",
     "MessageStatus": "Trạng thái",
+    "TicketZone": "Vị trí",
+    "OccurredAtBy": "lúc {0} bởi {1}",
     "Actions": {
       "CreateMessages": "Gửi thông báo",
       "ViewTicket": "Xem vé",

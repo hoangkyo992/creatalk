@@ -1,4 +1,6 @@
-﻿namespace Cms.Api.Controllers;
+﻿using Cms.Application.Features.Webhooks;
+
+namespace Cms.Api.Controllers;
 
 [Route($"webhooks")]
 [ApiController]
@@ -18,15 +20,44 @@ public class WebhooksController(IMediator mediator) : ControllerBase
         var server = headers.GetValueOrDefault("x-zevent-server");
         if (server != "ZNS")
         {
-            return BadRequest($"[1003] Invalid request!");
+            return BadRequest($"[1003] Invalid server!");
         }
-        var signature = headers.GetValueOrDefault("x-zevent-signature");
+        var signature = headers.GetValueOrDefault("x-zevent-signature") ?? string.Empty;
+        if (string.IsNullOrWhiteSpace(signature))
+        {
+            return BadRequest($"[1004] Invalid signature!");
+        }
+
         var payload = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
+        var validationResult = await mediator.Send(new VerifyEvent.Command
+        {
+            ProviderCode = "ZNS",
+            ProviderId = providerId,
+            Parameters = new Dictionary<string, object>
+            {
+                { "Signature", signature }
+            }
+        });
+
+        if (!validationResult.IsSuccess)
+        {
+            return BadRequest($"[1005] Invalid request!");
+        }
 
         Response.OnCompleted(async () =>
         {
-            // Handle logic
+            await mediator.Send(new HandleEvent.Command
+            {
+                ProviderCode = "ZNS",
+                ProviderId = providerId,
+                Parameters = new Dictionary<string, object>
+                {
+                    { "Signature", signature }
+                },
+                EventPayload = payload
+            }, CancellationToken.None);
         });
+
         return Ok("OK");
     }
 

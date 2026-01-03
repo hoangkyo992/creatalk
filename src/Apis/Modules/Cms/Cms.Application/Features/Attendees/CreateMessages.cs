@@ -24,6 +24,7 @@ public class CreateMessages
 
     public class Handler(IAppContext appContext,
         IActivityLogService activityLogService,
+        IQueueService queueService,
         ICurrentUser currentUser) : IRequestHandler<Command, ApiResult<Result>>
     {
         public async Task<ApiResult<Result>> Handle(Command command, CancellationToken cancellationToken)
@@ -31,6 +32,7 @@ public class CreateMessages
             var provider = await appContext.MessageProviders
                 .Where(c => !c.IsDisabled)
                 .Where(c => c.Code == command.ProviderCode)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(cancellationToken);
 
             if (provider == null)
@@ -45,7 +47,7 @@ public class CreateMessages
             var chunks = attendeeIds.Chunk(100).ToList();
             foreach (var ids in chunks)
             {
-                appContext.AttendeeMessages.AddRange(ids.Select(c => new AttendeeMessage
+                var messages = ids.Select(c => new AttendeeMessage
                 {
                     AttendeeId = c,
                     ProviderId = provider.Id,
@@ -53,14 +55,16 @@ public class CreateMessages
                     ResponsePayload = string.Empty,
                     MessageId = string.Empty,
                     StatusId = MessageStatus.New
-                }));
+                }).ToList();
+                appContext.AttendeeMessages.AddRange(messages);
                 await appContext.SaveChangesAsync(cancellationToken);
+                await messages.ForEachAsync(async c => await queueService.EnqueueAsync(c.Id));
             }
 
             activityLogService.Setup(LogLabel.CreateAttendeeMessages, $"Create {attendeeIds.Length} {provider.Name} message(s)", currentUser);
             activityLogService.AddLog(new LogEntityModel(nameof(MessageProvider), provider.Id)
             {
-                Action = ActivityLogAction.Delete,
+                Action = ActivityLogAction.Create,
                 OldValue = new { },
                 NewValue = new
                 {

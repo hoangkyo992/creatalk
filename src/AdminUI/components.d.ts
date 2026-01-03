@@ -18,6 +18,7 @@ declare module 'vue' {
     AppSidebar: typeof import('./src/components/layout/AppSidebar.vue')['default']
     AppTopbar: typeof import('./src/components/layout/AppTopbar.vue')['default']
     AttendeeList: typeof import('./src/pages/cms/attendees/components/AttendeeList.vue')['default']
+    AttendeeTimelineDialog: typeof import('./src/pages/cms/attendees/components/AttendeeTimelineDialog.vue')['default']
     AttributeUpsert: typeof import('./src/pages/cms/attributes/components/AttributeUpsert.vue')['default']
     AttributeValueDataTable: typeof import('./src/pages/cms/attributes/components/AttributeValueDataTable.vue')['default']
     AttributeValueUpsert: typeof import('./src/pages/cms/attributes/components/AttributeValueUpsert.vue')['default']
@@ -65,6 +66,8 @@ declare module 'vue' {
     TranslationDataView: typeof import('./src/pages/cms/languages/components/TranslationDataView.vue')['default']
     TranslationUpsert: typeof import('./src/pages/cms/languages/components/TranslationUpsert.vue')['default']
     UIComponentUpsert: typeof import('./src/pages/cms/ui-components/components/UIComponentUpsert.vue')['default']
+    UploadTickets: typeof import('./src/pages/cms/tickets/components/UploadTickets.vue')['default']
+    UploadTicketsDialog: typeof import('./src/pages/cms/tickets/components/UploadTicketsDialog.vue')['default']
     UserResetPassword: typeof import('./src/pages/system/components/UserResetPassword.vue')['default']
     UserUpsert: typeof import('./src/pages/system/components/UserUpsert.vue')['default']
   }

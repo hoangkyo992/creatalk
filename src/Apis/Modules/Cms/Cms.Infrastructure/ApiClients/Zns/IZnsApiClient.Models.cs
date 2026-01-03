@@ -1,10 +1,10 @@
-﻿using System.Text.Json.Serialization;
-using HungHd.Shared.Utilities;
-
-namespace Cms.Infrastructure.ApiClients.Zns;
+﻿namespace Cms.Infrastructure.ApiClients.Zns;
 
 public class SendMessageReqDto
 {
+    [JsonPropertyName("mode")]
+    public string Mode { get; init; }
+
     [JsonPropertyName("phone")]
     public string Phone { get; init; }
 
@@ -81,4 +81,41 @@ public class ZnsWebhookMessageReqDto
 
     [JsonPropertyName("tracking_id")]
     public string TrackingId { get; init; }
+}
+
+public class ZnsRefreshTokenResDto
+{
+    [JsonPropertyName("error_name")]
+    public string ErrorName { get; init; }
+
+    [JsonPropertyName("error_reason")]
+    public string ErrorReason { get; init; }
+
+    [JsonPropertyName("error_description")]
+    public string ErrorDescription { get; init; }
+
+    [JsonPropertyName("access_token")]
+    public string AccessToken { get; init; }
+
+    [JsonPropertyName("refresh_token")]
+    public string RefreshToken { get; init; }
+
+    [JsonPropertyName("expires_in")]
+    public string ExpiresIn { get; init; }
+
+    [JsonIgnore]
+    public DateTime ExpirationTime
+    {
+        get
+        {
+            try
+            {
+                return DateTime.UtcNow.AddSeconds(Convert.ToInt32(this.ExpiresIn));
+            }
+            catch
+            {
+                return DateTime.UtcNow;
+            }
+        }
+    }
 }

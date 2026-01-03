@@ -2,47 +2,87 @@
 using System.Text;
 using Cms.Application.Services.Abstractions;
 using Cms.Domain.Entities;
-using Microsoft.AspNetCore.Http;
+using Cms.Infrastructure.ApiClients.Zns;
 
 namespace Cms.Infrastructure.Services;
 
-public class ZnsMessageSender : IMessageSender
+public class ZnsMessageSender(IZnsApiClient znsClient, IOptions<ZnsOptions> options) : IMessageSender
 {
-    public Task<SendMessageResponse> SendAsync(MessageProvider provider, AttendeeMessage message, CancellationToken cancellationToken = default)
+    public async Task<SendMessageResponse> SendAsync(MessageProvider provider, AttendeeMessage message, CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
-    }
-
-    public bool IsValidSignature(HttpRequest request, string oaSecret)
-    {
-        // 1. Read the raw request body (must be done carefully in ASP.NET Core)
-        // EnableBuffering is necessary to read the body without affecting subsequent reads
-        request.EnableBuffering();
-        using var reader = new StreamReader(request.Body, Encoding.UTF8, true, 1024, leaveOpen: true);
-        var rawRequestBody = reader.ReadToEndAsync().Result;
-        request.Body.Position = 0; // Reset the stream position for the controller action to read later
-
-        // 2. Get headers
-        if (!request.Headers.TryGetValue("X-ZEvent-Signature", out var signatureHeader) ||
-            !request.Headers.TryGetValue("timestamp", out var timestampHeader) ||
-            !request.Headers.TryGetValue("appid", out var appIdHeader))
+        var payload = new SendMessageReqDto
         {
-            return false;
+            Mode = options.Value.Mode,
+            Phone = message.Attendee.PhoneNumber,
+            TemplateId = options.Value.TemplateId,
+            TrackingId = ZCode.Get(message.Id),
+            TemplateData = new
+            {
+                LINK = message.Attendee.TicketId
+            }
+        };
+        var response = await znsClient.SendMessageAsync(payload, cancellationToken);
+        if (!response.IsSuccessStatusCode)
+        {
+            return new SendMessageResponse
+            {
+                IsSuccess = response.IsSuccessStatusCode,
+                RequestPayload = payload.ToJson(),
+                ResponsePayload = await response.Content.ReadAsStringAsync(cancellationToken),
+            };
         }
 
-        var receivedSignature = signatureHeader.ToString();
-        var timestamp = timestampHeader.ToString();
-        var appId = appIdHeader.ToString();
+        var resDto = await response.Content.ReadAsAsync<SendMessageResDto>();
+        return new SendMessageResponse
+        {
+            IsSuccess = resDto.Error == 0,
+            ErrorMessage = resDto.Message,
+            MessageId = resDto.Data?.MsgId ?? string.Empty,
+            RequestPayload = payload.ToJson(),
+            ResponsePayload = await response.Content.ReadAsStringAsync(cancellationToken)
+        };
+    }
 
-        // 3. Reconstruct the signature base string: sha256(appId + data + timeStamp + OAsecretKey)
-        // The 'data' here is the raw JSON string
-        var signatureBase = $"{appId}{rawRequestBody}{timestamp}{oaSecret}";
+    public async Task<VerifyEventResponse> VerifyEventAsync(MessageProvider provider, string payload, Dictionary<string, object> parameters, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var znsObj = payload.FromJson<ZnsWebhookReqDto>();
+            _ = long.TryParse(znsObj.Message.DeliveryTime, System.Globalization.NumberStyles.None, null, out var timestamp);
 
-        // 4. Compute the HMAC-SHA256 signature
-        var computedSignature = CalculateHmacSha256(signatureBase, oaSecret);
+            // Reconstruct the signature base string: sha256(appId + data + timeStamp + OAsecretKey)
+            var signatureBase = $"{options.Value.AppId}{payload}{timestamp}{options.Value.SecretKey}";
 
-        // 5. Compare the computed signature with the received signature (case-insensitive)
-        return string.Equals(computedSignature, receivedSignature, StringComparison.OrdinalIgnoreCase);
+            // Compute the HMAC-SHA256 signature
+            var computedSignature = CalculateHmacSha256(signatureBase, options.Value.SecretKey);
+
+            // Compare the computed signature with the received signature (case-insensitive)
+            var isValid = string.Equals(computedSignature, parameters.GetValueOrDefault("signature")?.ToString(), StringComparison.OrdinalIgnoreCase);
+            if (isValid)
+            {
+                var time = DateTimeOffset.FromUnixTimeMilliseconds(timestamp);
+                return await Task.FromResult(new VerifyEventResponse
+                {
+                    IsSuccess = false,
+                    DeliveryTime = time.ToUniversalTime().DateTime,
+                    MessageId = znsObj.Message.MsgId,
+                    TrackingId = znsObj.Message.TrackingId,
+                });
+            }
+            return new VerifyEventResponse
+            {
+                IsSuccess = false,
+                ErrorMessage = "Invalid signature"
+            };
+        }
+        catch (Exception ex)
+        {
+            return new VerifyEventResponse
+            {
+                IsSuccess = false,
+                ErrorMessage = ex.Message
+            };
+        }
     }
 
     private static string CalculateHmacSha256(string data, string key)

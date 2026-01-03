@@ -1,10 +1,8 @@
 ﻿using Cms.Domain.Shared;
 using Common.Infrastructure;
-using HungHd.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Cms.Infrastructure.Persistence;
 
