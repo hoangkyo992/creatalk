@@ -23,6 +23,9 @@ public static partial class ServiceConfigurations
         services.AddHttpClient();
         services.AddScoped<IActivityLogService, ActivityLogService>();
         services.AddTransient<IFeatureProvider, FeatureProvider>();
+        services.AddSingleton<IImageResizer, ImageResizer>();
+        services.AddSingleton<IFilePropertyBuilder, FilePropertyBuilder>();
+
         AddCdnConfiguration(services, configuration);
         AddAwsServices(services, configuration);
         AddCdnDbContext(services, configuration);

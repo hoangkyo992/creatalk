@@ -1,10 +1,8 @@
-﻿using ImageMagick;
+﻿namespace Cdn.Infrastructure.Services;
 
-namespace Cdn.Application.Common;
-
-public static class FilePropertyBuilder
+public class FilePropertyBuilder : IFilePropertyBuilder
 {
-    public static string GetProperties(byte[] content, FileType typeId)
+    public string GetProperties(byte[] content, FileType typeId)
     {
         var properties = new List<string>();
         if (typeId == FileType.Image)

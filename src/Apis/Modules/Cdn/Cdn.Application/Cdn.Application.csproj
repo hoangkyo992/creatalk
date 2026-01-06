@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" />
-    <PackageReference Include="Magick.NET-Q16-AnyCPU" />
   </ItemGroup>
 
 </Project>

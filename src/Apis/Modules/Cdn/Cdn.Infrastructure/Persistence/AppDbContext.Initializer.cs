@@ -1,5 +1,4 @@
 ﻿using Cdn.Domain.Entities;
-using Cdn.Domain.Shared.Enums;
 using HungHd.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;

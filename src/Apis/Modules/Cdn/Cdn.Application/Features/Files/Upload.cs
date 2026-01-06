@@ -1,4 +1,5 @@
-﻿using Cdn.Domain.Services;
+﻿using Cdn.Application.Services;
+using Cdn.Domain.Services;
 using Cdn.Domain.Shared.Constants;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -53,6 +54,7 @@ public class Upload
         IStorageService storageService,
         IConfiguration configuration,
         IAppContext appContext,
+        IFilePropertyBuilder propertyBuilder,
         ICurrentUser currentUser) : IRequestHandler<Command, ApiResult<Result>>
     {
         public async Task<ApiResult<Result>> Handle(Command command, CancellationToken cancellationToken)
@@ -127,7 +129,7 @@ public class Upload
                 using var memoryStream = new MemoryStream();
                 await file.CopyToAsync(memoryStream, cancellationToken);
                 await storageService.UploadAsync(newFile, memoryStream, cancellationToken);
-                newFile.Properties = FilePropertyBuilder.GetProperties(newFile.Content, newFile.TypeId);
+                newFile.Properties = propertyBuilder.GetProperties(newFile.Content, newFile.TypeId);
                 files.Add(newFile);
             }
 

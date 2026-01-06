@@ -7,7 +7,7 @@ class HttpService {
   cmsClient: AxiosInstance;
 
   constructor() {
-    const token = authUtils.getAuthentication()?.access_token;
+    const token = authUtils.getAuthentication()?.access_token ?? "";
     const authorization = `Bearer ${token}`;
 
     this.cmsClient = axios.create({
