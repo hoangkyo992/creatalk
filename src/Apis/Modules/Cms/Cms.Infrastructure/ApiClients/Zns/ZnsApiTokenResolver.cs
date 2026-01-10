@@ -11,9 +11,11 @@ internal class ZnsApiTokenResolver(IHttpClientFactory httpClientFactory,
     private static readonly Lock ObjLock = new();
     private readonly ZnsOptions _znsOptions = znsOptions.Value;
     private DateTime? _expiresAt;
-    private string? _accessToken;
+    private string? _accessToken = znsOptions.Value.AccessToken;
 
     public Dictionary<string, string> AdditionalHeaders => [];
+
+    public string AccessTokenHeaderName => _znsOptions.AccessTokenHeaderName;
 
     private async Task RequestTokenAsync()
     {

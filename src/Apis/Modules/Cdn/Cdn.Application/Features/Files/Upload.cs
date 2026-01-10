@@ -109,11 +109,12 @@ public class Upload
                         { "extension", extension }
                     });
                 }
-                var throwIfFileNameExists = configuration.GetValue("ThrowIfFileNameExists", false);
-                if (throwIfFileNameExists && existedFileNames.Contains(file.FileName.ToLowerInvariant()))
-                {
+                var checkFileNameExistsLevel = configuration.GetValue("CheckFileNameExistsLevel", "None").ToUpperInvariant();
+                if (checkFileNameExistsLevel == "FOLDER" && existedFileNames.Contains(file.FileName.ToLowerInvariant()))
                     return new FailResult<Result>(ErrorMessages.FILE_NAME_EXISTED, "name", file.FileName, HttpStatusCode.NotAcceptable);
-                }
+                else if (checkFileNameExistsLevel == "ALL"
+                    && await appContext.Files.Where(x => x.Name.ToLower() == file.FileName.ToLowerInvariant()).AnyAsync(cancellationToken))
+                    return new FailResult<Result>(ErrorMessages.FILE_NAME_EXISTED, "name", file.FileName, HttpStatusCode.NotAcceptable);
 
                 var fileName = GetFileName(file.FileName, existedFileNames, maxFileCountPerFolder);
                 var newFile = new Domain.Entities.File

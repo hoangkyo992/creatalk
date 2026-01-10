@@ -135,7 +135,7 @@
         />
       </template>
     </Column>
-    <Column field="email" :header="$t('AttendeesPage.Email')" style="min-width: 250px" sortable>
+    <Column field="phoneNumber" :header="$t('AttendeesPage.PhoneNumber')" style="width: 200px" sortable>
       <template #filter="{ filterModel, filterCallback }">
         <InputText
           v-model="filterModel.value"
@@ -148,7 +148,7 @@
         />
       </template>
     </Column>
-    <Column field="phoneNumber" :header="$t('AttendeesPage.PhoneNumber')" style="width: 200px" sortable>
+    <Column field="ticketNumber" :header="$t('AttendeesPage.TicketNumber')" style="min-width: 250px" sortable>
       <template #filter="{ filterModel, filterCallback }">
         <InputText
           v-model="filterModel.value"

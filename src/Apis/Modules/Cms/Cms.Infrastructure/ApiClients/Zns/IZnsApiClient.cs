@@ -4,6 +4,7 @@ namespace Cms.Infrastructure.ApiClients.Zns;
 
 public interface IZnsApiClient
 {
-    [Post("/message/template")]
-    Task<HttpResponseMessage> SendMessageAsync(SendMessageReqDto payload, CancellationToken cancellationToken = default);
+    [Post("/{path}")]
+    [Headers("Content-Type: application/json")]
+    Task<HttpResponseMessage> SendMessageAsync([AliasAs("path")] string path, [Body] SendMessageReqDto payload, CancellationToken cancellationToken = default);
 }

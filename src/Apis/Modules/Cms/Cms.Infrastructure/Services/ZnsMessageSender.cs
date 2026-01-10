@@ -8,20 +8,22 @@ namespace Cms.Infrastructure.Services;
 
 public class ZnsMessageSender(IZnsApiClient znsClient, IOptions<ZnsOptions> options) : IMessageSender
 {
-    public async Task<SendMessageResponse> SendAsync(MessageProvider provider, AttendeeMessage message, CancellationToken cancellationToken = default)
+    public virtual async Task<SendMessageResponse> SendAsync(
+        MessageProvider provider,
+        AttendeeMessage message,
+        string templateCode,
+        CancellationToken cancellationToken = default)
     {
         var payload = new SendMessageReqDto
         {
             Mode = options.Value.Mode,
             Phone = message.Attendee.PhoneNumber,
             TemplateId = options.Value.TemplateId,
+            OAId = options.Value.OAId,
             TrackingId = ZCode.Get(message.Id),
-            TemplateData = new
-            {
-                LINK = message.Attendee.TicketId
-            }
+            TemplateData = GetTemplateData(templateCode, message)
         };
-        var response = await znsClient.SendMessageAsync(payload, cancellationToken);
+        var response = await znsClient.SendMessageAsync(options.Value.SendZnsEndpoint, payload, cancellationToken);
         if (!response.IsSuccessStatusCode)
         {
             return new SendMessageResponse
@@ -32,39 +34,52 @@ public class ZnsMessageSender(IZnsApiClient znsClient, IOptions<ZnsOptions> opti
             };
         }
 
-        var resDto = await response.Content.ReadAsAsync<SendMessageResDto>();
-        return new SendMessageResponse
+        var result = new SendMessageResponse
         {
-            IsSuccess = resDto.Error == 0,
-            ErrorMessage = resDto.Message,
-            MessageId = resDto.Data?.MsgId ?? string.Empty,
             RequestPayload = payload.ToJson(),
             ResponsePayload = await response.Content.ReadAsStringAsync(cancellationToken)
         };
+
+        if (options.Value.Provider == "SimpleZns")
+        {
+            var resDto = await response.Content.ReadAsAsync<SendSimpleMessageResDto>();
+            result.IsSuccess = resDto.Status == "success" && resDto.Data.Error == 0;
+            result.ErrorMessage = resDto.Data.Message;
+            result.MessageId = resDto.Data.Data?.MsgId ?? string.Empty;
+        }
+        else
+        {
+            var resDto = await response.Content.ReadAsAsync<SendMessageResDto>();
+            result.IsSuccess = resDto.Error == 0;
+            result.ErrorMessage = resDto.Message;
+            result.MessageId = resDto.Data?.MsgId ?? string.Empty;
+        }
+
+        return result;
     }
 
-    public async Task<VerifyEventResponse> VerifyEventAsync(MessageProvider provider, string payload, Dictionary<string, object> parameters, CancellationToken cancellationToken)
+    public virtual async Task<VerifyEventResponse> VerifyEventAsync(MessageProvider provider, string payload, Dictionary<string, object> parameters, CancellationToken cancellationToken)
     {
         try
         {
             var znsObj = payload.FromJson<ZnsWebhookReqDto>();
-            _ = long.TryParse(znsObj.Message.DeliveryTime, System.Globalization.NumberStyles.None, null, out var timestamp);
+            _ = long.TryParse(znsObj.Timestamp, System.Globalization.NumberStyles.None, null, out var timestamp);
 
             // Reconstruct the signature base string: sha256(appId + data + timeStamp + OAsecretKey)
-            var signatureBase = $"{options.Value.AppId}{payload}{timestamp}{options.Value.SecretKey}";
+            var signatureBase = $"{options.Value.AppId}{payload}{timestamp}{options.Value.OASecretKey}";
 
             // Compute the HMAC-SHA256 signature
-            var computedSignature = CalculateHmacSha256(signatureBase, options.Value.SecretKey);
-
+            var computedSignature = CalculateHmacSha256(signatureBase);
+            computedSignature = $"mac={computedSignature}";
             // Compare the computed signature with the received signature (case-insensitive)
-            var isValid = string.Equals(computedSignature, parameters.GetValueOrDefault("signature")?.ToString(), StringComparison.OrdinalIgnoreCase);
+            var isValid = string.Equals(computedSignature, parameters.GetValueOrDefault("Signature")?.ToString(), StringComparison.OrdinalIgnoreCase);
             if (isValid)
             {
                 var time = DateTimeOffset.FromUnixTimeMilliseconds(timestamp);
                 return await Task.FromResult(new VerifyEventResponse
                 {
-                    IsSuccess = false,
-                    DeliveryTime = time.ToUniversalTime().DateTime,
+                    IsSuccess = true,
+                    DeliveryTime = time.DateTime.ToLocalTime(),
                     MessageId = znsObj.Message.MsgId,
                     TrackingId = znsObj.Message.TrackingId,
                 });
@@ -85,19 +100,37 @@ public class ZnsMessageSender(IZnsApiClient znsClient, IOptions<ZnsOptions> opti
         }
     }
 
-    private static string CalculateHmacSha256(string data, string key)
+    private static string CalculateHmacSha256(string data)
     {
-        var keyBytes = Encoding.UTF8.GetBytes(key);
-        var dataBytes = Encoding.UTF8.GetBytes(data);
-        using var hmac = new HMACSHA256(keyBytes);
-        var hashBytes = hmac.ComputeHash(dataBytes);
+        using SHA256 sha256 = SHA256.Create();
+        byte[] bytes = Encoding.UTF8.GetBytes(data);
+        byte[] hash = sha256.ComputeHash(bytes);
 
-        // Zalo expects the signature in lowercase hex string format
-        var builder = new StringBuilder();
-        foreach (var t in hashBytes)
+        // Convert to hex string
+        StringBuilder sb = new StringBuilder();
+        foreach (byte b in hash)
         {
-            builder.Append(t.ToString("x2"));
+            sb.Append(b.ToString("x2"));
         }
-        return builder.ToString();
+        return sb.ToString();
+    }
+
+    private static object GetTemplateData(string template, AttendeeMessage message)
+    {
+        switch (template)
+        {
+            case "TETKHOISAC":
+                return new
+                {
+                    name = message.Attendee.PhoneNumber,
+                    ma = message.Attendee.TicketNumber,
+                    ticket_url = message.Attendee.TicketPath
+                };
+
+            default:
+                return new
+                {
+                };
+        }
     }
 }

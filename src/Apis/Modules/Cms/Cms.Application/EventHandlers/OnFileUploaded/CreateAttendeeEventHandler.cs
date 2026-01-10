@@ -20,33 +20,58 @@ internal class CreateAttendeeEventHandler(IServiceProvider serviceProvider) : IN
                 continue;
 
             var fileName = file.Name[..^file.Extension.Length];
-            var (name, phone, email) = GetAttendeeData(fileName);
+            var (name, phone, ticketNumber) = GetAttendeeData(fileName);
             if (string.IsNullOrWhiteSpace(name))
                 continue;
 
-            var attendee = await context.Attendees
+            if (!phone.StartsWith('0'))
+                phone = '0' + phone;
+
+            var newAttendee = await context.Attendees
                 .Where(c => c.FullName.ToLower() == name.ToLower())
-                .Where(c => c.Email.ToLower() == email.ToLower())
+                .Where(c => c.TicketNumber.ToLower() == ticketNumber.ToLower())
                 .Where(c => c.PhoneNumber.ToLower() == phone.ToLower())
                 .FirstOrDefaultAsync(cancellationToken);
-            if (attendee is not null) continue;
+            if (newAttendee is not null) continue;
 
             var (firstName, lastName) = ParseName(name);
 
-            attendee = new Attendee
+            newAttendee = new Attendee
             {
                 CreatedBy = notification.CurrentUser,
                 CreatedTime = DateTime.UtcNow,
-                StatusId = 0, //New
-                Email = email,
+                StatusId = AttendeeStatus.Default,
+                Email = "",
                 FullName = name,
                 FirstName = firstName,
                 LastName = lastName,
                 PhoneNumber = phone,
+                TicketNumber = ticketNumber,
+                TicketPath = file.Url,
                 TicketId = fileId,
                 TicketZone = notification.FolderName
             };
-            context.Attendees.Add(attendee);
+
+            var existedAttendee = await context.Attendees
+                .Where(c => c.PhoneNumber.ToLower() == phone.ToLower())
+                .Where(c => c.StatusId == AttendeeStatus.Default)
+                .Include(c => c.Messages)
+                .FirstOrDefaultAsync(cancellationToken);
+            if (existedAttendee is not null)
+            {
+                if (newAttendee.TicketZone == "FAN ZONE" && existedAttendee.TicketZone != "FAN ZONE")
+                {
+                    if (existedAttendee.Messages.Count == 0)
+                    {
+                        existedAttendee.StatusId = AttendeeStatus.Cancelled;
+                    }
+                }
+                else
+                {
+                    newAttendee.StatusId = AttendeeStatus.Cancelled;
+                }
+            }
+            context.Attendees.Add(newAttendee);
         }
         await context.SaveChangesAsync(cancellationToken);
     }

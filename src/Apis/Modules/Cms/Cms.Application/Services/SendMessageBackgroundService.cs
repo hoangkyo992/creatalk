@@ -32,7 +32,7 @@ public class SendMessageBackgroundService(IServiceScopeFactory scopeFactory,
                         var service = scope.ServiceProvider.GetKeyedService<IMessageSender>(message.Provider.Code)
                             ?? throw new NotImplementedException($"The message sender {message.Provider.Code} is not implemented!");
 
-                        var output = await service.SendAsync(message.Provider, message, CancellationToken.None);
+                        var output = await service.SendAsync(message.Provider, message, "TETKHOISAC", CancellationToken.None);
 
                         message.StatusId = output.IsSuccess ? MessageStatus.Succeeded : MessageStatus.Failed;
                         message.MessageId = output.MessageId;
@@ -47,7 +47,7 @@ public class SendMessageBackgroundService(IServiceScopeFactory scopeFactory,
                     finally
                     {
                         await appContext.SaveChangesAsync(CancellationToken.None);
-                        await Task.Delay(100, stoppingToken);
+                        await Task.Delay(200, stoppingToken);
                     }
                 }
             }

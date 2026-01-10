@@ -8,7 +8,7 @@ internal class ZnsAuthorizationHandler([FromKeyedServices(ZnsAuthorizationHandle
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
         var accessToken = await tokenResolver.GetAccessToken();
-        request.Headers.TryAddWithoutValidation("access_token", accessToken);
+        request.Headers.TryAddWithoutValidation(tokenResolver.AccessTokenHeaderName, accessToken);
 
         var context = request.GetPolicyExecutionContext();
         if (context is null)

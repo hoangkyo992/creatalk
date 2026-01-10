@@ -6,9 +6,9 @@ namespace Cms.Api.Controllers;
 [ApiController]
 [AllowAnonymous]
 [EnableRateLimiting(nameof(RateLimitPolicy.IpAddressTokenBucket))]
-public class WebhooksController(IMediator mediator) : ControllerBase
+public class WebhooksController(IMediator mediator, ILogger<WebhooksController> logger) : ControllerBase
 {
-    [HttpGet("zns/{providerId}/events"), MapToApiVersion(ApiConstants.Ver1_0)]
+    [HttpPost("zns/{providerId}/events"), MapToApiVersion(ApiConstants.Ver1_0)]
     public async Task<IActionResult> CapturePaypalEventAsync([FromRoute][ZCodeToInt64] long providerId,
         [FromQuery(Name = "t")] string token)
     {
@@ -29,27 +29,33 @@ public class WebhooksController(IMediator mediator) : ControllerBase
         }
 
         var payload = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
-        var validationResult = await mediator.Send(new VerifyEvent.Command
-        {
-            ProviderCode = "ZNS",
-            ProviderId = providerId,
-            Parameters = new Dictionary<string, object>
-            {
-                { "Signature", signature }
-            }
-        });
-
-        if (!validationResult.IsSuccess)
-        {
-            return BadRequest($"[1005] Invalid request!");
-        }
 
         Response.OnCompleted(async () =>
         {
+            var validationResult = await mediator.Send(new VerifyEvent.Command
+            {
+                ProviderCode = "ZNS",
+                ProviderId = providerId,
+                EventPayload = payload,
+                Parameters = new Dictionary<string, object>
+            {
+                { "Signature", signature }
+            }
+            });
+
+            if (!validationResult.IsSuccess)
+            {
+                logger.LogInformation("[1005] Invalid request!");
+                return;
+            }
+
             await mediator.Send(new HandleEvent.Command
             {
                 ProviderCode = "ZNS",
                 ProviderId = providerId,
+                TrackingId = validationResult.Result.TrackingId,
+                DeliveryTime = validationResult.Result.DeliveryTime,
+                MessageId = validationResult.Result.MessageId,
                 Parameters = new Dictionary<string, object>
                 {
                     { "Signature", signature }

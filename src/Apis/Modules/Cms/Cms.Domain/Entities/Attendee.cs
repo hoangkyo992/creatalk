@@ -18,6 +18,7 @@ public class Attendee : TenantBaseEntity
     public string FullName { get; set; }
 
     [Required]
+    [DefaultValue("")]
     [MaxLength(AttendeeConstants.ColumnsMaxLength.Email)]
     public string Email { get; set; }
 
@@ -29,6 +30,11 @@ public class Attendee : TenantBaseEntity
     [DefaultValue("")]
     [MaxLength(AttendeeConstants.ColumnsMaxLength.TicketNumber)]
     public string TicketNumber { get; set; }
+
+    [Required]
+    [DefaultValue("")]
+    [MaxLength(AttendeeConstants.ColumnsMaxLength.TicketPath)]
+    public string TicketPath { get; set; }
 
     [Required]
     [DefaultValue("")]

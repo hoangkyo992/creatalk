@@ -92,10 +92,19 @@ const events = computed(() => {
     }
   ];
   if (props.message.sentAt) {
+    let color = "red";
+    try {
+      const payload = JSON.parse(props.message.responsePayload!);
+      if (payload && (payload.status == "success" || payload.error == 0)) color = "#4CAF50";
+    } catch {
+      //
+    } finally {
+      //
+    }
     data.push({
       time: props.message.sentAt,
       icon: "pi pi-send",
-      color: "red",
+      color: color,
       action: "Sent",
       user: "System",
       content: ``

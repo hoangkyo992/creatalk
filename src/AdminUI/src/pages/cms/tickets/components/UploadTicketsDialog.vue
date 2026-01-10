@@ -134,6 +134,7 @@ import { FolderStatus } from "@/contracts/Enums";
 import type { FolderItemDto } from "@/contracts/FileAndFolders";
 import { useEventListener } from "@vueuse/core";
 import { onBeforeRouteLeave } from "vue-router";
+import { useAppNotification } from "@/composables/appNotification";
 
 const $t = useI18n().t;
 
@@ -148,6 +149,8 @@ const onReset = (callback) => {
   uploadingFiles.value = [];
   callback();
 };
+
+const notifier = useAppNotification();
 
 const onUpload = async () => {
   v.value.$touch();
@@ -168,6 +171,8 @@ const onUpload = async () => {
     await Promise.all(promises);
   }
   isUploading.value = false;
+  notifier.success($t("Dialog.Alert.UpdateSuccess"));
+  emits("uploaded", true);
 };
 
 const doUploadAsync = async (file: File) => {
@@ -229,7 +234,7 @@ const onSelectedFiles = (event) => {
   files.value = event.files;
 };
 
-const emits = defineEmits(["close"]);
+const emits = defineEmits(["uploaded", "close"]);
 
 const zoneId = ref("");
 const validator = useAppValidation();

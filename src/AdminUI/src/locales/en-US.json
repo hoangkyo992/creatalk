@@ -455,6 +455,7 @@
     "FullName": "Full name",
     "Email": "Email",
     "PhoneNumber": "Phone number",
+    "TicketNumber": "Entrance code",
     "MessageStatus": "Status",
     "TicketZone": "Zone",
     "OccurredAtBy": "at {0} by {1}",

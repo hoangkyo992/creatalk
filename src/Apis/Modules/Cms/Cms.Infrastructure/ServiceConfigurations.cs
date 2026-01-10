@@ -112,13 +112,11 @@ public static partial class ServiceConfigurations
         services.AddTransient<ResponseLoggingHandler>();
         services.AddTransient<ZnsAuthorizationHandler>();
         services.TryAddKeyedSingleton<IApiTokenResolver, ZnsApiTokenResolver>(nameof(ZnsApiTokenResolver));
-
         services.AddRefitClient<IZnsApiClient>()
             .ConfigureHttpClient(c => c.BaseAddress = new Uri(znsOptions.ServiceUrl))
             .AddPolicyHandler(GetUnauthPolicy())
             .AddHttpMessageHandler<ResponseLoggingHandler>()
             .AddHttpMessageHandler<ZnsAuthorizationHandler>();
-
         services.AddKeyedSingleton<IMessageSender, ZnsMessageSender>("ZNS");
 
         return services;

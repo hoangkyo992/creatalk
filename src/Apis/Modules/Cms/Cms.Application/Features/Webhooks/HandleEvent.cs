@@ -21,14 +21,10 @@ public class HandleEvent
     {
         public async Task<ApiResult<Result>> Handle(Command command, CancellationToken cancellationToken)
         {
-            ZCode.TryGetInt64(command.TrackingId, out var messageId);
-            if (messageId <= 0)
-                return new FailResult<Result>(ErrorMessages.MESSAGE_NOT_FOUND, HttpStatusCode.NotFound);
-
             var message = await appContext.AttendeeMessages
                 .IgnoreQueryFilters()
                 .Where(c => c.StatusId == MessageStatus.Succeeded)
-                .Where(c => c.Id == messageId)
+                .Where(c => c.MessageId == command.MessageId)
                 .Where(c => c.ProviderId == command.ProviderId)
                 .FirstOrDefaultAsync(cancellationToken);
 

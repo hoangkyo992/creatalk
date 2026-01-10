@@ -10,6 +10,7 @@ public static class AttendeeConstants
         public const int Email = 255;
         public const int PhoneNumber = 50;
         public const int TicketNumber = 50;
+        public const int TicketPath = 250;
         public const int TicketZone = 50;
     }
 }

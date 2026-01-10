@@ -453,6 +453,7 @@
     "Email": "Email",
     "PhoneNumber": "SĐT",
     "MessageStatus": "Trạng thái",
+    "TicketNumber": "Mã vé",
     "TicketZone": "Vị trí",
     "OccurredAtBy": "lúc {0} bởi {1}",
     "Actions": {

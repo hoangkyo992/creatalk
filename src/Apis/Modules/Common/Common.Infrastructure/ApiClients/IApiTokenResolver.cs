@@ -7,4 +7,6 @@ public interface IApiTokenResolver
     Task<string> GetAccessToken();
 
     Dictionary<string, string> AdditionalHeaders { get; }
+
+    string AccessTokenHeaderName { get; }
 }

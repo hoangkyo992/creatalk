@@ -168,6 +168,7 @@ meta:
           showUpload = false;
         }
       "
+      @uploaded="fetchData"
     ></UploadTicketsDialog>
   </div>
 </template>

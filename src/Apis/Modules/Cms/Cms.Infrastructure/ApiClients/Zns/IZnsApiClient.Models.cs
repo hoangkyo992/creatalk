@@ -11,6 +11,9 @@ public class SendMessageReqDto
     [JsonPropertyName("template_id")]
     public string TemplateId { get; init; }
 
+    [JsonPropertyName("oa_id")]
+    public string OAId { get; init; }
+
     [JsonPropertyName("template_data")]
     public object TemplateData { get; init; }
 

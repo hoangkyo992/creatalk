@@ -18,6 +18,7 @@ public class GetItem
         public string Email { get; init; }
         public string PhoneNumber { get; init; }
         public string TicketNumber { get; init; }
+        public string TicketPath { get; init; }
         public AttendeeStatus StatusId { get; init; }
 
         [JsonConverter(typeof(ZCodeJsonConverter))]
@@ -69,6 +70,7 @@ public class GetItem
                     TicketId = c.TicketId,
                     TicketNumber = c.TicketNumber,
                     TicketZone = c.TicketZone,
+                    TicketPath = c.TicketPath,
                     StatusId = c.StatusId,
                     Messages = c.Messages
                         .Select(m => new MessageItem
@@ -98,7 +100,7 @@ public class GetItem
                 return new FailResult<Result>(ErrorMessages.ATTENDEE_NOT_FOUND, HttpStatusCode.NotFound);
 
             if (item.TicketId > 0)
-                item.TicketUrl = $"{options.Value.PublicPath}/files/{ZCode.Get(item.TicketId)}";
+                item.TicketUrl = $"{options.Value.PublicPath}/{item.TicketPath}";
 
             return new SuccessResult<Result>(item);
         }

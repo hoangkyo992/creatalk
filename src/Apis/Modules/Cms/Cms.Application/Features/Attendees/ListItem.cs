@@ -24,6 +24,7 @@ public class ListItem
             public string Email { get; init; }
             public string PhoneNumber { get; init; }
             public string TicketNumber { get; init; }
+            public string TicketPath { get; init; }
             public AttendeeStatus StatusId { get; init; }
 
             [JsonConverter(typeof(ZCodeJsonConverter))]
@@ -111,6 +112,7 @@ public class ListItem
                     TicketNumber = c.TicketNumber,
                     StatusId = c.StatusId,
                     TicketZone = c.TicketZone,
+                    TicketPath = c.TicketPath,
                     Messages = c.Messages
                         .Select(m => new Result.MessageItem
                         {
@@ -138,7 +140,7 @@ public class ListItem
             data.Data.ForEach(v =>
             {
                 if (v.TicketId > 0)
-                    v.TicketUrl = $"{options.Value.PublicPath}/files/{ZCode.Get(v.TicketId)}";
+                    v.TicketUrl = $"{options.Value.PublicPath}/{v.TicketPath}";
             });
 
             return new SuccessResult<Result>(new Result(data));

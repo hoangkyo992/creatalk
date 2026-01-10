@@ -4,15 +4,15 @@ public interface IMessageSender
 {
     Task<VerifyEventResponse> VerifyEventAsync(MessageProvider provider, string payload, Dictionary<string, object> parameters, CancellationToken cancellationToken);
 
-    Task<SendMessageResponse> SendAsync(MessageProvider provider, AttendeeMessage message, CancellationToken cancellationToken = default);
+    Task<SendMessageResponse> SendAsync(MessageProvider provider, AttendeeMessage message, string templateCode, CancellationToken cancellationToken = default);
 }
 
 public class SendMessageResponse
 {
-    public bool IsSuccess { get; init; }
-    public string ErrorMessage { get; init; }
     public string RequestPayload { get; init; }
     public string ResponsePayload { get; init; }
+    public virtual bool IsSuccess { get; set; }
+    public virtual string ErrorMessage { get; set; }
     public virtual string MessageId { get; set; }
 }
 
