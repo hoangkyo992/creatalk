@@ -21,9 +21,10 @@ internal class CreateAttendeeEventHandler(IServiceProvider serviceProvider) : IN
 
             var fileName = file.Name[..^file.Extension.Length];
             var (name, phone, ticketNumber) = GetAttendeeData(fileName);
-            if (string.IsNullOrWhiteSpace(name))
+            if (string.IsNullOrWhiteSpace(phone))
                 continue;
 
+            phone = string.Join("", phone.Select(char.IsDigit));
             if (!phone.StartsWith('0'))
                 phone = '0' + phone;
 

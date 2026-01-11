@@ -47,7 +47,7 @@ public class SendMessageBackgroundService(IServiceScopeFactory scopeFactory,
                     finally
                     {
                         await appContext.SaveChangesAsync(CancellationToken.None);
-                        await Task.Delay(200, stoppingToken);
+                        await Task.Delay(100, stoppingToken);
                     }
                 }
             }
