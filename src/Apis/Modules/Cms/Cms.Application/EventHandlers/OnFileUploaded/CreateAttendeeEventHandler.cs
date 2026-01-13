@@ -24,7 +24,7 @@ internal class CreateAttendeeEventHandler(IServiceProvider serviceProvider) : IN
             if (string.IsNullOrWhiteSpace(phone))
                 continue;
 
-            phone = string.Join("", phone.Select(char.IsDigit));
+            phone = string.Join("", phone.Where(char.IsDigit).ToArray());
             if (!phone.StartsWith('0'))
                 phone = '0' + phone;
 

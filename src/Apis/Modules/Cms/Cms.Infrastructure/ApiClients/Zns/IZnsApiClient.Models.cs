@@ -64,8 +64,20 @@ public class ZnsWebhookReqDto
     [JsonPropertyName("event_name")]
     public string EventName { get; init; }
 
+    [JsonPropertyName("app_id")]
+    public string AppId { get; init; }
+
+    [JsonPropertyName("timestamp")]
+    public string Timestamp { get; init; }
+}
+
+public class ZnsWebhookReqDto<T>
+{
+    [JsonPropertyName("event_name")]
+    public string EventName { get; init; }
+
     [JsonPropertyName("message")]
-    public ZnsWebhookMessageReqDto Message { get; init; }
+    public T Message { get; init; }
 
     [JsonPropertyName("app_id")]
     public string AppId { get; init; }

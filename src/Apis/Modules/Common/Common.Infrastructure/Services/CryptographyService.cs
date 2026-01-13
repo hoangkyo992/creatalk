@@ -1,6 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 using Common.Application.Services;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.Extensions.Configuration;
 
 namespace Common.Infrastructure.Services;
@@ -19,35 +20,79 @@ internal sealed class CryptographyService : ICryptographyService
     public string Decrypt(in object data)
     {
         ArgumentNullException.ThrowIfNull(data);
-        byte[] cipherBytes = Convert.FromBase64String((data.ToString() ?? string.Empty).Replace("%2B", "+").Replace("%20", " "));
-        using var encryptor = Aes.Create();
-#pragma warning disable SYSLIB0041 // Type or member is obsolete
-        using var encryptionData = new Rfc2898DeriveBytes(_encryptionKey, Encoding.ASCII.GetBytes(_encryptionKey));
-#pragma warning restore SYSLIB0041 // Type or member is obsolete
-        encryptor.IV = encryptionData.GetBytes(16);
-        encryptor.Key = encryptionData.GetBytes(32);
-        encryptor.Mode = CipherMode.CBC;
-        using var ms = new MemoryStream();
-        using var cs = new CryptoStream(ms, encryptor.CreateDecryptor(), CryptoStreamMode.Write);
-        cs.Write(cipherBytes, 0, cipherBytes.Length);
-        cs.Close();
-        return Encoding.Unicode.GetString(ms.ToArray());
+
+        // Normalize input
+        string input = data.ToString() ?? string.Empty;
+        input = input.Replace("%2B", "+").Replace("%20", " ");
+        byte[] cipherBytes = Convert.FromBase64String(input);
+
+        // Derive key and IV using PBKDF2
+        byte[] salt = Encoding.ASCII.GetBytes(_encryptionKey);
+        byte[] key = KeyDerivation.Pbkdf2(
+            password: _encryptionKey,
+            salt: salt,
+            prf: KeyDerivationPrf.HMACSHA256,
+            iterationCount: 100_000,
+            numBytesRequested: 32);
+
+        byte[] iv = KeyDerivation.Pbkdf2(
+            password: _encryptionKey,
+            salt: salt,
+            prf: KeyDerivationPrf.HMACSHA256,
+            iterationCount: 100_000,
+            numBytesRequested: 16);
+
+        using var aes = Aes.Create();
+        aes.Key = key;
+        aes.IV = iv;
+        aes.Mode = CipherMode.CBC;
+        aes.Padding = PaddingMode.PKCS7;
+
+        using var decryptor = aes.CreateDecryptor();
+        using var ms = new MemoryStream(cipherBytes);
+        using var cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read);
+        using var reader = new StreamReader(cs, Encoding.Unicode);
+
+        return reader.ReadToEnd();
     }
 
     public string Encrypt(in object data)
     {
         ArgumentNullException.ThrowIfNull(data);
+
+        // Convert input to bytes
         byte[] clearBytes = Encoding.Unicode.GetBytes(data.ToString() ?? string.Empty);
-        using var encryptor = Aes.Create();
-#pragma warning disable SYSLIB0041 // Type or member is obsolete
-        using var encryptionData = new Rfc2898DeriveBytes(_encryptionKey, Encoding.ASCII.GetBytes(_encryptionKey));
-#pragma warning restore SYSLIB0041 // Type or member is obsolete
-        encryptor.Key = encryptionData.GetBytes(32);
-        encryptor.IV = encryptionData.GetBytes(16);
+
+        // Derive key and IV using PBKDF2
+        byte[] salt = Encoding.ASCII.GetBytes(_encryptionKey);
+        byte[] key = KeyDerivation.Pbkdf2(
+            password: _encryptionKey,
+            salt: salt,
+            prf: KeyDerivationPrf.HMACSHA256,
+            iterationCount: 100_000,
+            numBytesRequested: 32);
+
+        byte[] iv = KeyDerivation.Pbkdf2(
+            password: _encryptionKey,
+            salt: salt,
+            prf: KeyDerivationPrf.HMACSHA256,
+            iterationCount: 100_000,
+            numBytesRequested: 16);
+
+        using var aes = Aes.Create();
+        aes.Key = key;
+        aes.IV = iv;
+        aes.Mode = CipherMode.CBC;
+        aes.Padding = PaddingMode.PKCS7;
+
         using var ms = new MemoryStream();
-        using var cs = new CryptoStream(ms, encryptor.CreateEncryptor(), CryptoStreamMode.Write);
-        cs.Write(clearBytes, 0, clearBytes.Length);
-        cs.Close();
-        return Convert.ToBase64String(ms.ToArray()).Replace("+", "%2B").Replace(" ", "%20");
+        using (var cs = new CryptoStream(ms, aes.CreateEncryptor(), CryptoStreamMode.Write))
+        {
+            cs.Write(clearBytes, 0, clearBytes.Length);
+        }
+
+        return Convert.ToBase64String(ms.ToArray())
+                     .Replace("+", "%2B")
+                     .Replace(" ", "%20");
     }
 }

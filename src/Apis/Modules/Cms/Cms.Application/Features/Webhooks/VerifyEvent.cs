@@ -12,9 +12,7 @@ public class VerifyEvent
 
     public record Result
     {
-        public string MessageId { get; init; }
-        public string TrackingId { get; init; }
-        public DateTime DeliveryTime { get; init; }
+        public string EventName { get; init; }
     }
 
     public class Handler(IAppContext appContext,
@@ -47,9 +45,7 @@ public class VerifyEvent
                 {
                     return new SuccessResult<Result>(new Result
                     {
-                        MessageId = validationResult.MessageId,
-                        TrackingId = validationResult.TrackingId,
-                        DeliveryTime = validationResult.DeliveryTime
+                        EventName = validationResult.EventName
                     });
                 }
 

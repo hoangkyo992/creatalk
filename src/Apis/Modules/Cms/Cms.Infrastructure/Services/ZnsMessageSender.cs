@@ -6,7 +6,7 @@ using Cms.Infrastructure.ApiClients.Zns;
 
 namespace Cms.Infrastructure.Services;
 
-public class ZnsMessageSender(IZnsApiClient znsClient, IOptions<ZnsOptions> options) : IMessageSender
+public class ZnsMessageSender(IZnsApiClient znsClient, ILogger<ZnsMessageSender> logger, IOptions<ZnsOptions> options) : IMessageSender
 {
     public virtual async Task<SendMessageResponse> SendAsync(
         MessageProvider provider,
@@ -75,13 +75,10 @@ public class ZnsMessageSender(IZnsApiClient znsClient, IOptions<ZnsOptions> opti
             var isValid = string.Equals(computedSignature, parameters.GetValueOrDefault("Signature")?.ToString(), StringComparison.OrdinalIgnoreCase);
             if (isValid)
             {
-                var time = DateTimeOffset.FromUnixTimeMilliseconds(timestamp);
                 return await Task.FromResult(new VerifyEventResponse
                 {
                     IsSuccess = true,
-                    DeliveryTime = time.DateTime.ToLocalTime(),
-                    MessageId = znsObj.Message.MsgId,
-                    TrackingId = znsObj.Message.TrackingId,
+                    EventName = znsObj.EventName,
                 });
             }
             return new VerifyEventResponse
@@ -98,6 +95,32 @@ public class ZnsMessageSender(IZnsApiClient znsClient, IOptions<ZnsOptions> opti
                 ErrorMessage = ex.Message
             };
         }
+    }
+
+    public virtual async Task<Dictionary<string, object?>> GetEventDataAsync(string eventName, string payload, CancellationToken cancellationToken)
+    {
+        try
+        {
+            if (eventName == "user_received_message")
+            {
+                var msg = payload.FromJson<ZnsWebhookReqDto<ZnsWebhookMessageReqDto>>()!.Message;
+                _ = long.TryParse(msg.DeliveryTime, System.Globalization.NumberStyles.None, null, out var deliveryTime);
+                var time = DateTimeOffset.FromUnixTimeMilliseconds(deliveryTime);
+
+                return await Task.FromResult(new Dictionary<string, object?>
+                {
+                    { "DeliveryTime", time.DateTime.ToLocalTime() },
+                    { "MessageId", msg.MsgId },
+                    { "TrackingId", msg.TrackingId }
+                });
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Failed to parse event data of event {EventName}", eventName);
+        }
+
+        return [];
     }
 
     private static string CalculateHmacSha256(string data)

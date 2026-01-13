@@ -9,7 +9,7 @@ namespace Cms.Api.Controllers;
 public class WebhooksController(IMediator mediator, ILogger<WebhooksController> logger) : ControllerBase
 {
     [HttpPost("zns/{providerId}/events"), MapToApiVersion(ApiConstants.Ver1_0)]
-    public async Task<IActionResult> CapturePaypalEventAsync([FromRoute][ZCodeToInt64] long providerId,
+    public async Task<IActionResult> CaptureZnsEventAsync([FromRoute][ZCodeToInt64] long providerId,
         [FromQuery(Name = "t")] string token)
     {
         if (!VerifyToken(token, providerId))
@@ -38,9 +38,9 @@ public class WebhooksController(IMediator mediator, ILogger<WebhooksController> 
                 ProviderId = providerId,
                 EventPayload = payload,
                 Parameters = new Dictionary<string, object>
-            {
-                { "Signature", signature }
-            }
+                {
+                    { "Signature", signature }
+                }
             });
 
             if (!validationResult.IsSuccess)
@@ -49,19 +49,20 @@ public class WebhooksController(IMediator mediator, ILogger<WebhooksController> 
                 return;
             }
 
-            await mediator.Send(new HandleEvent.Command
+            if (validationResult.Result.EventName == "user_received_message")
             {
-                ProviderCode = "ZNS",
-                ProviderId = providerId,
-                TrackingId = validationResult.Result.TrackingId,
-                DeliveryTime = validationResult.Result.DeliveryTime,
-                MessageId = validationResult.Result.MessageId,
-                Parameters = new Dictionary<string, object>
+                await mediator.Send(new HandleUserReceivedMessageEvent.Command
                 {
-                    { "Signature", signature }
-                },
-                EventPayload = payload
-            }, CancellationToken.None);
+                    ProviderCode = "ZNS",
+                    ProviderId = providerId,
+                    Parameters = new Dictionary<string, object>
+                    {
+                        { "Signature", signature }
+                    },
+                    EventName = validationResult.Result.EventName,
+                    EventPayload = payload
+                }, CancellationToken.None);
+            }
         });
 
         return Ok("OK");
