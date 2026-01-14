@@ -18,6 +18,7 @@ declare module 'vue' {
     AppTopbar: typeof import('./src/components/layout/AppTopbar.vue')['default']
     AttendeeList: typeof import('./src/pages/cms/attendees/components/AttendeeList.vue')['default']
     AttendeeTimelineDialog: typeof import('./src/pages/cms/attendees/components/AttendeeTimelineDialog.vue')['default']
+    AttendeeUpsert: typeof import('./src/pages/cms/attendees/components/AttendeeUpsert.vue')['default']
     ChangePassword: typeof import('./src/components/layout/ChangePassword.vue')['default']
     DateRangePicker: typeof import('./src/components/ui/DateRangePicker.vue')['default']
     FileManager: typeof import('./src/components/file-manager/FileManager.vue')['default']

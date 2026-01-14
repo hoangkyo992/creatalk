@@ -452,6 +452,7 @@
     }
   },
   "AttendeesPage": {
+    "Header": "Update Phone Number",
     "FullName": "Full name",
     "Email": "Email",
     "PhoneNumber": "Phone number",
@@ -464,12 +465,17 @@
       "ViewTicket": "View ticket",
       "Cancel": "Cancel ticket",
       "Restore": "Restore ticket",
+      "Resend": "Resend ticket",
       "ViewLogs": "View timeline"
     },
     "Confirmations": {
-      "CreateMessages": "Are you sure you want to send a notification to all event attendees?",
+      "CreateMessages": "Are you sure you want to send notifications to all event attendees?",
+      "ResendMessage": "Are you sure you want to send notifications to {0}?",
       "CancelAttendee": "Are you sure you want to cancel the ticket for this attendee?",
       "RestoreAttendee": "Are you sure you want to restore the ticket for this attendee?"
+    },
+    "Validations": {
+      "PhoneNumberIsRequired": "@:AttendeesPage.PhoneNumber is required"
     },
     "Alert": {
       "CreateMessagesSuccess": "Successfully sent notifications to {numberOfAttendees} attendees!!!",

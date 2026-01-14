@@ -1,13 +1,13 @@
 ﻿namespace Cms.Application.Features.Attendees;
 
-public class Cancel
+public class UpdatePhoneNumber
 {
     public record Command : IRequest<ApiResult<Result>>
     {
         [JsonIgnore]
         public long Id { get; set; }
 
-        public bool IsCancelled { get; init; }
+        public string PhoneNumber { get; init; }
     }
 
     public record Result
@@ -21,6 +21,9 @@ public class Cancel
             RuleFor(v => v.Id)
                 .NotNull()
                 .GreaterThan(0);
+            RuleFor(v => v.PhoneNumber)
+                .NotNull()
+                .NotEmpty();
         }
     }
 
@@ -38,21 +41,10 @@ public class Cancel
             if (item == null)
                 return new FailResult<Result>(ErrorMessages.ATTENDEE_NOT_FOUND, HttpStatusCode.NotFound);
 
-            if (command.IsCancelled)
-            {
-                if (item.StatusId == AttendeeStatus.Cancelled)
-                    return new FailResult<Result>(ErrorMessages.ATTENDEE_CANCELLED, HttpStatusCode.NotAcceptable);
-                activityLogService.Setup(LogLabel.CancelAttendee, $"Attendee [{item.PhoneNumber}] is cancelled", currentUser);
-            }
-            else
-            {
-                if (item.StatusId != AttendeeStatus.Cancelled)
-                    return new FailResult<Result>(ErrorMessages.ATTENDEE_NOT_CANCELLED, HttpStatusCode.NotAcceptable);
-                activityLogService.Setup(LogLabel.RestoreAttendee, $"Attendee [{item.PhoneNumber}] is restored", currentUser);
-            }
+            activityLogService.Setup(LogLabel.UpdateAttendee, $"Attendee [{item.PhoneNumber}] is updated", currentUser);
             var oldValue = mapper.Map<AttendeeLoggingDto>(item);
 
-            item.StatusId = command.IsCancelled ? AttendeeStatus.Cancelled : AttendeeStatus.Default;
+            item.PhoneNumber = command.PhoneNumber;
 
             activityLogService.AddLog(new LogEntityModel(nameof(Attendee), item.Id)
             {
@@ -62,10 +54,9 @@ public class Cancel
             });
 
             await appContext.SaveChangesAsync(cancellationToken);
-            await mediator.Publish(new OnAttendeeCancelledEvent
+            await mediator.Publish(new OnAttendeeUpdatedEvent
             {
                 Ids = [command.Id],
-                IsCancelled = command.IsCancelled
             }.SetCurrentUser(currentUser), cancellationToken);
 
             await activityLogService.CommitAsync();

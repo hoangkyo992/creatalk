@@ -82,44 +82,57 @@
     </template>
     <Column field="actions" class="text-center non-resizer" style="width: 96px; max-width: 96px; min-width: 96px">
       <template #body="{ data }">
-        <a
-          :href="data.ticketUrl"
-          v-tooltip.top="$t('AttendeesPage.Actions.ViewTicket')"
-          target="_blank"
-          class="p-button p-component p-button-icon-only p-button-primary p-button-rounded p-button-text"
-        >
-          <i class="pi pi-eye"></i>
-        </a>
-        <Button
-          type="button"
-          rounded
-          icon="pi pi-history"
-          severity="help"
-          v-tooltip.top="$t('AttendeesPage.Actions.ViewLogs')"
-          text
-          v-if="isSent && providerCode"
-          @click="viewItem(data)"
-        ></Button>
-        <Button
-          type="button"
-          rounded
-          icon="pi pi-ban"
-          severity="danger"
-          v-tooltip.top="$t('AttendeesPage.Actions.Cancel')"
-          text
-          v-if="statusId != AttendeeStatus.Cancelled && isSent == false && providerCode"
-          @click="cancelItem(data, true)"
-        ></Button>
-        <Button
-          type="button"
-          rounded
-          icon="pi pi-undo"
-          severity="warn"
-          v-tooltip.top="$t('AttendeesPage.Actions.Restore')"
-          text
-          v-if="statusId == AttendeeStatus.Cancelled"
-          @click="cancelItem(data, false)"
-        ></Button>
+        <div class="flex flex-wrap text-center justify-content-center align-items-center">
+          <a
+            :href="data.ticketUrl"
+            v-tooltip.top="$t('AttendeesPage.Actions.ViewTicket')"
+            target="_blank"
+            class="p-button p-component p-button-icon-only p-button-primary p-button-rounded p-button-text"
+          >
+            <i class="pi pi-eye"></i>
+          </a>
+          <Button
+            type="button"
+            rounded
+            icon="pi pi-history"
+            severity="help"
+            v-tooltip.top="$t('AttendeesPage.Actions.ViewLogs')"
+            text
+            v-if="isSent && providerCode"
+            @click="viewItem(data)"
+          ></Button>
+          <Button
+            type="button"
+            rounded
+            icon="pi pi-ban"
+            severity="danger"
+            v-tooltip.top="$t('AttendeesPage.Actions.Cancel')"
+            text
+            v-if="statusId != AttendeeStatus.Cancelled && isSent == false && providerCode"
+            @click="cancelItem(data, true)"
+          ></Button>
+          <Button
+            type="button"
+            rounded
+            icon="pi pi-undo"
+            severity="warn"
+            v-tooltip.top="$t('AttendeesPage.Actions.Restore')"
+            text
+            v-if="statusId == AttendeeStatus.Cancelled"
+            @click="cancelItem(data, false)"
+          ></Button>
+          <Button type="button" rounded icon="pi pi-pencil" severity="warn" v-tooltip.top="$t('Common.Actions.Update')" text @click="updateItem(data)"></Button>
+          <Button
+            type="button"
+            rounded
+            icon="pi pi-send"
+            severity="success"
+            v-tooltip.top="$t('AttendeesPage.Actions.Resend')"
+            text
+            v-if="statusId == AttendeeStatus.Default && isSent && providerCode"
+            @click="resentMessage(data)"
+          ></Button>
+        </div>
       </template>
     </Column>
     <Column field="fullName" :header="$t('AttendeesPage.FullName')" style="min-width: 250px" sortable>
@@ -231,7 +244,8 @@
       </template>
     </Column>
   </DataTable>
-  <AttendeeTimelineDialog v-if="selectedItem" :item="selectedItem" :message="findMessage(selectedItem)" @close="selectedItem = null"></AttendeeTimelineDialog>
+  <AttendeeUpsert v-if="showUpsert" :id="selectedItem?.id" @close="onClose"></AttendeeUpsert>
+  <AttendeeTimelineDialog v-if="showLog && selectedItem" :item="selectedItem" :message="findMessage(selectedItem)" @close="onClose"></AttendeeTimelineDialog>
 </template>
 
 <script lang="ts" setup>
@@ -302,11 +316,25 @@ const fetchData = async () => {
 const fetchDataHandler = debounce(fetchData, 300);
 
 const viewItem = (item: AttendeeItemDto) => {
+  showLog.value = true;
   selectedItem.value = item;
 };
 
 const findMessage = (item: AttendeeItemDto) => {
   return item.messages.find((x) => x.providerCode == props.providerCode);
+};
+
+const showLog = ref(false);
+const showUpsert = ref(false);
+const onClose = () => {
+  selectedItem.value = null;
+  showUpsert.value = false;
+  showLog.value = false;
+};
+
+const updateItem = (data) => {
+  showUpsert.value = true;
+  selectedItem.value = data;
 };
 
 const confirm = useConfirm();
@@ -338,6 +366,32 @@ const onCancel = async (item: AttendeeItemDto, isCancelled: boolean) => {
   try {
     isLoading.value = true;
     return await crudService.cancel(item.id, isCancelled);
+  } finally {
+    isLoading.value = false;
+  }
+};
+
+const resentMessage = (item: AttendeeItemDto) => {
+  confirm.require({
+    message: $t(`AttendeesPage.Confirmations.ResendMessage`, [item.phoneNumber]),
+    header: $t("Dialog.Title.Confirm"),
+    acceptLabel: $t("Dialog.Button.Accept"),
+    rejectLabel: $t("Dialog.Button.Reject"),
+    acceptClass: "p-button-danger p-button-sm w-auto",
+    rejectClass: "p-button-outlined p-button-sm w-auto",
+    icon: "pi pi-question-circle",
+    accept: async () => {
+      await onResend(item);
+      notifier.success($t(`Dialog.Alert.UpdateSuccess`));
+      await fetchData();
+    }
+  });
+};
+
+const onResend = async (item: AttendeeItemDto) => {
+  try {
+    isLoading.value = true;
+    return await crudService.resendMessage(item.id, props.providerCode ?? "");
   } finally {
     isLoading.value = false;
   }

@@ -35,11 +35,33 @@ public class AttendeesController(IMediator mediator) : ControllerBase
         return Ok(result);
     }
 
+    [HttpPut("{id}/phone-number"), MapToApiVersion(ApiConstants.Ver1_0)]
+    [ProducesResponseType(typeof(ApiResult<UpdatePhoneNumber.Result>), (int)HttpStatusCode.OK)]
+    [CheckRights(FeatureCodes.Cms.Attendees, ActionCodes.Update)]
+    public async Task<IActionResult> UpdatePhoneNumberAsync([FromRoute][ZCodeToInt64] long id,
+        [FromBody] UpdatePhoneNumber.Command command, CancellationToken cancellationToken = default)
+    {
+        command.Id = id;
+        var result = await mediator.Send(command, cancellationToken);
+        return Ok(result);
+    }
+
     [HttpPost("{id}/cancel"), MapToApiVersion(ApiConstants.Ver1_0)]
     [ProducesResponseType(typeof(ApiResult<Cancel.Result>), (int)HttpStatusCode.OK)]
     [CheckRights(FeatureCodes.Cms.Attendees, ActionCodes.Update)]
-    public async Task<IActionResult> UpdateFeaturesAsync([FromRoute][ZCodeToInt64] long id,
+    public async Task<IActionResult> CancelAsync([FromRoute][ZCodeToInt64] long id,
         [FromBody] Cancel.Command command, CancellationToken cancellationToken = default)
+    {
+        command.Id = id;
+        var result = await mediator.Send(command, cancellationToken);
+        return Ok(result);
+    }
+
+    [HttpPost("{id}/messages/resend"), MapToApiVersion(ApiConstants.Ver1_0)]
+    [ProducesResponseType(typeof(ApiResult<ResendMessage.Result>), (int)HttpStatusCode.OK)]
+    [CheckRights(FeatureCodes.Cms.Attendees, ActionCodes.CreateMessages)]
+    public async Task<IActionResult> ResendMessageAsync([FromRoute][ZCodeToInt64] long id,
+        [FromBody] ResendMessage.Command command, CancellationToken cancellationToken = default)
     {
         command.Id = id;
         var result = await mediator.Send(command, cancellationToken);

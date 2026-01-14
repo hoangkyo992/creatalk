@@ -449,6 +449,7 @@
     }
   },
   "AttendeesPage": {
+    "Header": "Cập nhật SĐT",
     "FullName": "Họ và tên",
     "Email": "Email",
     "PhoneNumber": "SĐT",
@@ -461,12 +462,17 @@
       "ViewTicket": "Xem vé",
       "Cancel": "Hủy vé",
       "Restore": "Khôi phục vé",
+      "Resend": "Gửi lại vé",
       "ViewLogs": "Xem lịch sử"
     },
     "Confirmations": {
+      "ResendMessage": "Bạn có chắc chắn muốn gửi thông báo cho {0}?",
       "CreateMessages": "Bạn có chắc chắn muốn gửi thông báo cho tất cả người tham dự sự kiện?",
       "CancelAttendee": "Bạn có chắc chắn muốn hủy vé cho người tham dự này?",
       "RestoreAttendee": "Bạn có chắc chắn muốn khôi phục vé cho người tham dự này?"
+    },
+    "Validations": {
+      "PhoneNumberIsRequired": "@:AttendeesPage.PhoneNumber không được để trống"
     },
     "Alert": {
       "CreateMessagesSuccess": "Gửi thông báo thành công cho {numberOfAttendees} người tham gia!!!",

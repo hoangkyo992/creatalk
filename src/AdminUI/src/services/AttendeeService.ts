@@ -48,6 +48,20 @@ class AttendeeService extends HttpService {
     return result.data;
   }
 
+  public async updatePhoneNumber(id: string, phoneNumber: string): Promise<ApiResult<EmptyResultDto>> {
+    const result = await this.cmsClient.put<ApiResult<EmptyResultDto>>(`/api/attendees/${id}/phone-number`, {
+      phoneNumber
+    });
+    return result.data;
+  }
+
+  public async resendMessage(id: string, providerCode: string): Promise<ApiResult<EmptyResultDto>> {
+    const result = await this.cmsClient.post<ApiResult<EmptyResultDto>>(`/api/attendees/${id}/messages/resend`, {
+      providerCode
+    });
+    return result.data;
+  }
+
   public async createMessages(providerCode: string): Promise<ApiResult<EmptyResultDto>> {
     const result = await this.cmsClient.post<ApiResult<EmptyResultDto>>(`/api/attendees/messages`, {
       providerCode

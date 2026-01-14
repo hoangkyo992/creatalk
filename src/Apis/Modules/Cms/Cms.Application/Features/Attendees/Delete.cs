@@ -36,7 +36,7 @@ public class Delete
             if (item == null)
                 return new FailResult<Result>(ErrorMessages.ATTENDEE_NOT_FOUND, HttpStatusCode.NotFound);
 
-            activityLogService.Setup(LogLabel.DeleteAttendee, $"Attendee [{item.Email}] is deleted", currentUser);
+            activityLogService.Setup(LogLabel.DeleteAttendee, $"Attendee [{item.PhoneNumber}] is deleted", currentUser);
             var oldValue = mapper.Map<AttendeeLoggingDto>(item);
 
             item.IsDeleted = true;
